@@ -11,10 +11,10 @@ import view.Clientes;
 public class Controller {
 	
 	private DAO dao = new DAO();
-	public DefaultTableModel atualizaCliente() {
+	public DefaultTableModel listarClientes() {
 		// Método para preencher a tabela de dados cliente
 
-		ArrayList<Beans> orcamento = dao.atualizaCliente();
+		ArrayList<Beans> orcamento = dao.listarClientes();
 		// Cria um objeto para receber os dados da classe Beans
 
 		DefaultTableModel table = (DefaultTableModel) Clientes.tabelaClientes.getModel();

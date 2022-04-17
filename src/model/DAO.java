@@ -32,8 +32,8 @@ public class DAO {
 		return con;
 	}
 	
-	/** Método para atualizar lista de clientes **/
-	public ArrayList<Beans> atualizaCliente() {
+	/** Método para listar clientes **/
+	public ArrayList<Beans> listarClientes() {
 		ArrayList<Beans> clientes = new ArrayList<>();
 		// Cria um objeto para acessar a classe Beans
 
@@ -108,9 +108,34 @@ public class DAO {
 			pstmt.setInt(1, codigoCliente);
 			pstmt.execute();
 			con.close();
+			JOptionPane.showOptionDialog(null, "Cliente removido com sucesso!", "Remover Cliente", -1, 1, null,
+					null, null);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
+	}
+	public ArrayList<Beans> editarCliente() {
+		ArrayList<Beans> clientes = new ArrayList<>();
+		String sql = "select * from cliente order by nomeCliente";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+				int codigoCliente = rs.getInt(1);
+				String nomeCliente = rs.getString(2);
+				String foneCliente = rs.getString(3);
+				String emailCliente = rs.getString(4);
+				String endCliente = rs.getString(5);
+				clientes.add(new Beans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
+			}
+			con.close();
+			return clientes;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 }
