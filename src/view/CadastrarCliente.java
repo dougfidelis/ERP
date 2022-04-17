@@ -2,13 +2,12 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Orcamentos extends JFrame {
+public class CadastrarCliente extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,7 +18,7 @@ public class Orcamentos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Orcamentos frame = new Orcamentos();
+					CadastrarCliente frame = new CadastrarCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,15 +30,15 @@ public class Orcamentos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Orcamentos() {
+	public CadastrarCliente() {
 		/** _________________Configurações do frame_____________________ **/
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				"C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
-		setTitle("ERP - Orçamentos");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		/** _________________Botões e suas funções_____________________ **/
 
+		
+		
+		
 		/** __________________Elementos do frame_______________________ **/
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
