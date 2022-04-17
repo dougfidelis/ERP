@@ -5,24 +5,24 @@ public class Beans {
 	/**______Atributos Clientes_______**/
 	private int codigoCliente;
 	private String nomeCliente;
-	private String telCliente;
+	private String foneCliente;
 	private String emailCliente;
 	private String endCliente;
 	
 	/**_____Construtores Clientes_____**/
-	public Beans(String nomeCliente, String telCliente, String emailCliente, String endCliente) {
+	public Beans(String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
 		super();
 		this.nomeCliente = nomeCliente;
-		this.telCliente = telCliente;
+		this.foneCliente = foneCliente;
 		this.emailCliente = emailCliente;
 		this.endCliente = endCliente;
 	}
 	
-	public Beans(int codigoCliente, String nomeCliente, String telCliente, String emailCliente, String endCliente) {
+	public Beans(int codigoCliente, String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
 		super();
 		this.codigoCliente = codigoCliente;
 		this.nomeCliente = nomeCliente;
-		this.telCliente = telCliente;
+		this.foneCliente = foneCliente;
 		this.emailCliente = emailCliente;
 		this.endCliente = endCliente;
 	}
@@ -40,11 +40,11 @@ public class Beans {
 	public void setNomeCliente(String nomeCliente) {
 		this.nomeCliente = nomeCliente;
 	}
-	public String getTelCliente() {
-		return telCliente;
+	public String getFoneCliente() {
+		return foneCliente;
 	}
-	public void setTelCliente(String telCliente) {
-		this.telCliente = telCliente;
+	public void setTelCliente(String foneCliente) {
+		this.foneCliente = foneCliente;
 	}
 	public String getEmailCliente() {
 		return emailCliente;

@@ -38,13 +38,15 @@ public class Orcamentos extends JFrame {
 		setTitle("ERP - Orçamentos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		/** _________________Botões e suas funções_____________________ **/
-
+		
 		/** __________________Elementos do frame_______________________ **/
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		/** _________________Botões e suas funções_____________________ **/
+
 	}
 
 }

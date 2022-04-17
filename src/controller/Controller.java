@@ -22,14 +22,13 @@ public class Controller {
 
 		if (table.getRowCount() > 0) {
 			table.setRowCount(0);
-			// Zera as tabela criada
-		}
+		}// Zera as tabela criada para adicionar os dados do banco		
 
 		for (Beans item : orcamento) {
 			Object[] linha = new Object[4];
 			linha[0] = ((Beans) item).getCodigoCliente();
 			linha[1] = ((Beans) item).getNomeCliente();
-			linha[2] = ((Beans) item).getTelCliente();
+			linha[2] = ((Beans) item).getFoneCliente();
 			linha[3] = ((Beans) item).getEmailCliente();
 			table.addRow(linha);
 			// Preenche a tabela com os dados recebidos da classe Beans
@@ -37,6 +36,14 @@ public class Controller {
 
 		return table;
 		// Retorna a tabela com os dados recebidos da classe Beans
+	}
+	
+	public void salvar(Beans cliente) {
+		dao.cadastrarCliente(cliente);
+	}
+	
+	public void removerCliente(int codigoCliente) {
+		dao.removerCliente(codigoCliente);
 	}
 
 }
