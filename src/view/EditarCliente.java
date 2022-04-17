@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -51,8 +52,23 @@ public class EditarCliente extends JFrame {
 	private DAO dao = new DAO();
 	private Controller control = new Controller();
 	private Clientes cliente = new Clientes();
+	private JTextField txtCodigo;
 	public EditarCliente() {
-		addWindowListener(new WindowAdapter() {});
+		addWindowListener(new WindowAdapter() {			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				int linha = tabelaClientes.getSelectedRow();//
+				int codigo = (int)tabelaClientes.getValueAt(linha, 0);
+				ArrayList<Beans> cliente = dao.selecionarCliente(codigo);
+				txtNomeCliente.setText(cliente.get(0).getNomeCliente());
+				txtFoneCliente.setText(cliente.get(0).getFoneCliente());
+				txtEmailCliente.setText(cliente.get(0).getEmailCliente());
+				txtEndCliente.setText(cliente.get(0).getEndCliente());
+				txtCodigo.setText(String.valueOf(cliente.get(0).getCodigoCliente()));
+				
+				
+			}
+});
 		/** _________________Configurações do frame_____________________ **/
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 531, 256);
@@ -64,7 +80,7 @@ public class EditarCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroCliente = new JLabel("Editar Cliente");
+		JLabel lblCadastroCliente = new JLabel("Atualizar Cliente");
 		lblCadastroCliente.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		lblCadastroCliente.setBounds(10, 11, 227, 46);
 		contentPane.add(lblCadastroCliente);
@@ -108,7 +124,7 @@ public class EditarCliente extends JFrame {
 		
 		/** _________________Botões e suas funções_____________________ **/
 
-		JButton btnSalvar = new JButton("Salvar");
+		JButton btnSalvar = new JButton("Atualizar");
 		btnSalvar.addActionListener(new ActionListener() {
 			private Object frame;
 
@@ -133,8 +149,18 @@ public class EditarCliente extends JFrame {
 				}
 			}
 		});
-		btnSalvar.setBounds(372, 139, 128, 23);
+		btnSalvar.setBounds(372, 183, 128, 23);
 		contentPane.add(btnSalvar);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
+		txtCodigo.setBounds(414, 140, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		JLabel lblCdigo = new JLabel("C\u00F3digo");
+		lblCdigo.setBounds(366, 143, 53, 14);
+		contentPane.add(lblCdigo);
 		
 		
 	}

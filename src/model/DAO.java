@@ -115,12 +115,13 @@ public class DAO {
 		}
 
 	}
-	public ArrayList<Beans> editarCliente() {
-		ArrayList<Beans> clientes = new ArrayList<>();
-		String sql = "select * from cliente order by nomeCliente";
+	public ArrayList<Beans> selecionarCliente(int codigo) {
+		ArrayList<Beans> cliente = new ArrayList<Beans>();
+		String sql = "select * from cliente WHERE codigoCliente = ?";
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
@@ -129,13 +130,34 @@ public class DAO {
 				String foneCliente = rs.getString(3);
 				String emailCliente = rs.getString(4);
 				String endCliente = rs.getString(5);
-				clientes.add(new Beans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
+				cliente.add(new Beans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
 			}
 			con.close();
-			return clientes;
+			return cliente;
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
+		}
+	}
+	
+	public void updateCliente(Beans cliente) {
+		String sqlCreate = "update cliente set nomeCliente = '?', "
+				+ "foneCliente = '?', emailCliente = '?', "
+				+ "endCliente = '?' WHERE codigoCliente = ?";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(sqlCreate);
+			pst.setString(1, cliente.getNomeCliente());
+			pst.setString(2, cliente.getFoneCliente());
+			pst.setString(3, cliente.getEmailCliente());
+			pst.setString(4, cliente.getEndCliente());
+			pst.setInt(4, cliente.getCodigoCliente());
+			pst.executeUpdate();
+			con.close();
+			JOptionPane.showOptionDialog(null, "Cliente atualizado com sucesso!", "Cadastro OK", -1, 1, null,
+					null, null);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 }

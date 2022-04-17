@@ -44,6 +44,19 @@ public class Controller {
 	
 	public void removerCliente(int codigoCliente) {
 		dao.removerCliente(codigoCliente);
+	}	
+	
+	public ArrayList<Beans> selecionarCliente() {
+		ArrayList<Beans> cliente = dao.listarClientes();
+		for (Beans item : cliente) {
+			Object[] linha = new Object[5];
+			linha[0] = ((Beans) item).getCodigoCliente();
+			linha[1] = ((Beans) item).getNomeCliente();
+			linha[2] = ((Beans) item).getFoneCliente();
+			linha[3] = ((Beans) item).getEmailCliente();
+			linha[4] = ((Beans) item).getEndCliente();
+		}
+		return cliente;
 	}
 
 }

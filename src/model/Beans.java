@@ -10,6 +10,9 @@ public class Beans {
 	private String endCliente;
 	
 	/**_____Construtores Clientes_____**/
+	
+	
+	
 	public Beans(String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
 		super();
 		this.nomeCliente = nomeCliente;
@@ -18,6 +21,11 @@ public class Beans {
 		this.endCliente = endCliente;
 	}
 	
+	public Beans(int codigoCliente) {
+		super();
+		this.codigoCliente = codigoCliente;
+	}
+
 	public Beans(int codigoCliente, String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
 		super();
 		this.codigoCliente = codigoCliente;
