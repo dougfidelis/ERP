@@ -66,6 +66,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Clientes frame = new Clientes();
 				frame.setVisible(true);
+				dispose();
 			}
 		});
 		JButton btnOrcamento = new JButton("Or\u00E7amentos");

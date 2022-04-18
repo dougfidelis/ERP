@@ -4,6 +4,7 @@ import static view.Clientes.tabelaClientes;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -52,7 +53,13 @@ public class CadastrarCliente extends JFrame {
 	private Controller control = new Controller();
 	private Clientes cliente = new Clientes();
 	public CadastrarCliente() {
-		addWindowListener(new WindowAdapter() {});
+		addWindowListener(new WindowAdapter() {			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Clientes frame = new Clientes();
+				frame.setVisible(true);
+			}
+});
 		/** _________________Configurações do frame_____________________ **/
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 531, 256);
@@ -64,7 +71,7 @@ public class CadastrarCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroCliente = new JLabel("Cadastro Cliente");
+		JLabel lblCadastroCliente = new JLabel("Cadastrar Cliente");
 		lblCadastroCliente.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		lblCadastroCliente.setBounds(10, 11, 227, 46);
 		contentPane.add(lblCadastroCliente);
@@ -118,20 +125,28 @@ public class CadastrarCliente extends JFrame {
 				String email = txtEmailCliente.getText();
 				String endereco =txtEndCliente.getText();
 				Beans cliente = new Beans(nome, fone, email, endereco);
-				if(txtNomeCliente.getText().equals("")) {
-					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!",
-							-1, 2, null,null, null);
-				}else if( (txtFoneCliente.getText().equals("")) && (txtEmailCliente.getText().equals("")) ) {
-					JOptionPane.showOptionDialog(null, "Informe o telefone ou o email do cliente!", "Atenção!",
-							-1, 2, null,null, null);
-				}else {
-					dao.cadastrarCliente(cliente);
+				//if(txtNomeCliente.getText().equals("")) {
+					//JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!",
+						//	-1, 2, null,null, null);
+				//}else if( (txtFoneCliente.getText().equals("")) && (txtEmailCliente.getText().equals("")) ) {
+					//JOptionPane.showOptionDialog(null, "Informe o telefone ou o email do cliente!", "Atenção!",
+							//-1, 2, null,null, null);
+				//}else {
+					dao.cadastrarCliente(cliente);					
+					//Clientes frame = new Clientes();
+					//frame.setVisible(true);
+					//dispose();
+					//Runtime.getRuntime().exit(0);
+					
 					txtNomeCliente.setText("");
 					txtFoneCliente.setText("");
 					txtEmailCliente.setText("");
-					txtEndCliente.setText("");					
-				}
+					txtEndCliente.setText("");
+				//}
+				
 			}
+			
+		
 		});
 		btnSalvar.setBounds(372, 139, 128, 23);
 		contentPane.add(btnSalvar);

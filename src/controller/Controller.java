@@ -2,11 +2,15 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import model.Beans;
 import model.DAO;
 import view.Clientes;
+import view.EditarCliente;
 
 public class Controller {
 	
@@ -25,11 +29,12 @@ public class Controller {
 		}// Zera as tabela criada para adicionar os dados do banco		
 
 		for (Beans item : orcamento) {
-			Object[] linha = new Object[4];
+			Object[] linha = new Object[5];
 			linha[0] = ((Beans) item).getCodigoCliente();
 			linha[1] = ((Beans) item).getNomeCliente();
 			linha[2] = ((Beans) item).getFoneCliente();
 			linha[3] = ((Beans) item).getEmailCliente();
+			linha[4] = ((Beans) item).getEndCliente();
 			table.addRow(linha);
 			// Preenche a tabela com os dados recebidos da classe Beans
 		}
@@ -37,6 +42,9 @@ public class Controller {
 		return table;
 		// Retorna a tabela com os dados recebidos da classe Beans
 	}
+	
+	
+	
 	
 	public void salvar(Beans cliente) {
 		dao.cadastrarCliente(cliente);
@@ -58,5 +66,7 @@ public class Controller {
 		}
 		return cliente;
 	}
+	
+	
 
 }
