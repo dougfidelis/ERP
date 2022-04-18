@@ -25,6 +25,8 @@ import javax.swing.border.EmptyBorder;
 import controller.Controller;
 import model.Beans;
 import model.DAO;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class EditarCliente extends JFrame {
 
@@ -57,24 +59,28 @@ public class EditarCliente extends JFrame {
 	private Controller control = new Controller();
 	private Clientes c = new Clientes();
 	private static String janela = "";
-	private static int codigoCombo = 0;
+	private static String codigoCombo = Clientes.codDao;
 	JComboBox comboBox = new JComboBox();
+	JLabel lblcodDao = new JLabel("X");
 
 	public EditarCliente() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				
+				lblcodDao.setText(Clientes.codDao);
 				//int linha = tabelaClientes.getSelectedRow();
-				ArrayList<Beans> aux = dao.listarClientes();
-				//String nome = (aux.get(0).getNomeCliente());
-				//String fone = (aux.get(0).getFoneCliente());
-				//String email = (aux.get(0).getEmailCliente());
-				//String end = (aux.get(0).getEndCliente());
-				for (int i = 0; i < aux.size(); i++) {
-					comboBox.addItem(aux.get(i).getCodigoCliente());// +"-"+aux.get(i).getNomeCliente());
-					System.out.println(aux.size());
-					System.out.println(aux.get(i).getCodigoCliente());
+				ArrayList<Beans> aux1 = dao.listarClientes();
+				ArrayList<Beans> aux = dao.selecionarCliente(Integer.parseInt(Clientes.codDao));
+				txtNomeCliente.setText(aux.get(0).getNomeCliente());
+				txtFoneCliente.setText(aux.get(0).getFoneCliente());
+				txtEmailCliente.setText(aux.get(0).getEmailCliente());
+				txtEndCliente.setText(aux.get(0).getEndCliente());
+				
+				for (int i = 0; i < aux1.size(); i++) {
+					comboBox.addItem(aux1.get(i).getCodigoCliente());// +"-"+aux.get(i).getNomeCliente());
+					//System.out.println(aux.size());
+					//System.out.println(aux.get(i).getCodigoCliente());
 				}
 				comboBox.addItemListener(new ItemListener() {
 
@@ -83,7 +89,7 @@ public class EditarCliente extends JFrame {
 						//
 						if (e.getStateChange() == ItemEvent.SELECTED) {
 
-							codigoCombo = (int) e.getItem();
+							codigoCombo = (String) e.getItem();
 
 							// String valorSelecionado = e.getItem().toString();
 							// if(valorSelecionado.equals("ativo")){
@@ -93,11 +99,6 @@ public class EditarCliente extends JFrame {
 							// }
 						}
 
-						//ArrayList<Beans> aux = dao.selecionarCliente(codigoCombo);
-						txtNomeCliente.setText(aux.get(0).getNomeCliente());
-						txtFoneCliente.setText(aux.get(0).getFoneCliente());
-						txtEmailCliente.setText(aux.get(0).getEmailCliente());
-						txtEndCliente.setText(aux.get(0).getEndCliente());
 					}
 
 				});
@@ -122,7 +123,7 @@ public class EditarCliente extends JFrame {
 
 		txtNomeCliente = new JTextField();
 		txtNomeCliente.setColumns(10);
-		txtNomeCliente.setBounds(61, 87, 186, 20);
+		txtNomeCliente.setBounds(61, 84, 269, 20);
 		contentPane.add(txtNomeCliente);
 
 		txtEmailCliente = new JTextField();
@@ -131,34 +132,39 @@ public class EditarCliente extends JFrame {
 		contentPane.add(txtEmailCliente);
 
 		JLabel lblNewLabel_3 = new JLabel("Email");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_3.setBounds(10, 143, 48, 14);
 		contentPane.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_1 = new JLabel("Nome");
-		lblNewLabel_1.setBounds(10, 90, 46, 14);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(10, 85, 46, 14);
 		contentPane.add(lblNewLabel_1);
 
 		txtEndCliente = new JTextField();
 		txtEndCliente.setColumns(10);
-		txtEndCliente.setBounds(61, 112, 439, 20);
+		txtEndCliente.setBounds(61, 112, 269, 20);
 		contentPane.add(txtEndCliente);
 
 		JLabel lblNewLabel_2 = new JLabel("End.");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_2.setBounds(10, 115, 46, 14);
 		contentPane.add(lblNewLabel_2);
 
 		JLabel lblFone = new JLabel("Fone");
-		lblFone.setBounds(277, 90, 53, 14);
+		lblFone.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblFone.setBounds(10, 171, 53, 14);
 		contentPane.add(lblFone);
 
 		txtFoneCliente = new JTextField();
 		txtFoneCliente.setColumns(10);
-		txtFoneCliente.setBounds(309, 87, 191, 20);
+		txtFoneCliente.setBounds(61, 168, 269, 20);
 		contentPane.add(txtFoneCliente);
 
 		/** _________________Botões e suas funções_____________________ **/
 
 		JButton btnSalvar = new JButton("Atualizar");
+		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnSalvar.addActionListener(new ActionListener() {
 			private Object frame;
 
@@ -168,7 +174,7 @@ public class EditarCliente extends JFrame {
 				cliente.setFoneCliente(txtFoneCliente.getText());
 				cliente.setEmailCliente(txtEmailCliente.getText());
 				cliente.setEndCliente(txtEndCliente.getText());
-				cliente.setCodigoCliente(codigoCombo);
+				cliente.setCodigoCliente(Integer.parseInt(codigoCombo));
 				if (txtNomeCliente.getText().equals("")) {
 					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!", -1, 2, null, null,
 							null);
@@ -183,14 +189,19 @@ public class EditarCliente extends JFrame {
 				}
 			}
 		});
-		btnSalvar.setBounds(372, 183, 128, 23);
+		btnSalvar.setBounds(360, 103, 128, 38);
 		contentPane.add(btnSalvar);
+		comboBox.setVisible(false);
 
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Cliente" }));
-		comboBox.setBounds(61, 54, 295, 22);
+		comboBox.setBounds(61, 54, 269, 22);
 		contentPane.add(comboBox);
+		
+		
+		lblcodDao.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblcodDao.setBounds(208, 11, 227, 46);
+		contentPane.add(lblcodDao);
 
 	}
-
 }
 

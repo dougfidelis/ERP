@@ -57,7 +57,7 @@ public class Clientes extends JFrame {
 	private Controller control = new Controller();
 
 	static JTextField txtCod;
-	public static int codDao = 0;
+	public static String codDao = "";
 	public Clientes() {
 		addWindowListener(new WindowAdapter() {
 
@@ -92,13 +92,22 @@ public class Clientes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int linha = tabelaClientes.getSelectedRow();
 				txtCod.setText((tabelaClientes.getValueAt(linha, 0)).toString());
+				codDao=(tabelaClientes.getValueAt(linha, 0)).toString();
 			}
 		});
 		tabelaClientes.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "C\u00F3digo", "Nome", "Fone", "E-mail" }));
+				new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"C\u00F3digo", "Nome", "Fone", "E-mail", "Endere\u00E7o"
+			}
+		));
 		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(167);
 		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(114);
-		tabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(259);
+		tabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(177);
+		tabelaClientes.getColumnModel().getColumn(4).setPreferredWidth(263);
 		tabelaClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tabelaClientes);
 
@@ -135,27 +144,28 @@ public class Clientes extends JFrame {
 		JButton btnEditarCliente = new JButton("Editar cliente");
 		btnEditarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				EditarCliente frame = new EditarCliente();
-				frame.setVisible(true);
-				dispose();
-				DAO dao = new DAO();
-				//Clientes c = new Clientes();
 				int linha = tabelaClientes.getSelectedRow();
 				int aux = (int)tabelaClientes.getValueAt(linha, 0);
-				ArrayList<Beans> cliente = dao.selecionarCliente(aux);
-				codDao = cliente.get(0).getCodigoCliente();
-				
-
-				//int codInt = ( tabelaClientes.getValueAt(linha, 0))));
+				if (Integer.toString(aux).equalsIgnoreCase("")) {
+					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!", -1, 2, null, null,
+							null);
+				} else {
+					EditarCliente frame = new EditarCliente();
+					frame.setVisible(true);
+					dispose();
+				}
+			
 			}
 		});
 		btnEditarCliente.setBounds(432, 271, 141, 23);
 		contentPane.add(btnEditarCliente);
 
-		JButton btnAtualiza = new JButton("Atualizar lista");
+		JButton btnAtualiza = new JButton("Novo orcamento");		
 		btnAtualiza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tabelaClientes.setModel(control.listarClientes());
+				NovoOrcamento frame = new NovoOrcamento();
+				frame.setVisible(true);
+				dispose();
 			}
 		});
 		btnAtualiza.setBounds(20, 271, 141, 23);

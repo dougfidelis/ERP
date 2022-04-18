@@ -118,31 +118,24 @@ public class CadastrarCliente extends JFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			private Object frame;
-
 			public void actionPerformed(ActionEvent e) {
 				String nome = txtNomeCliente.getText();
 				String fone = txtFoneCliente.getText();
 				String email = txtEmailCliente.getText();
 				String endereco =txtEndCliente.getText();
 				Beans cliente = new Beans(nome, fone, email, endereco);
-				//if(txtNomeCliente.getText().equals("")) {
-					//JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!",
-						//	-1, 2, null,null, null);
-				//}else if( (txtFoneCliente.getText().equals("")) && (txtEmailCliente.getText().equals("")) ) {
-					//JOptionPane.showOptionDialog(null, "Informe o telefone ou o email do cliente!", "Atenção!",
-							//-1, 2, null,null, null);
-				//}else {
+				if(txtNomeCliente.getText().equals("")) {
+					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!",
+							-1, 2, null,null, null);
+				}else if( (txtFoneCliente.getText().equals("")) && (txtEmailCliente.getText().equals("")) ) {
+					JOptionPane.showOptionDialog(null, "Informe o telefone ou o email do cliente!", "Atenção!",
+							-1, 2, null,null, null);
+				}else {
 					dao.cadastrarCliente(cliente);					
-					//Clientes frame = new Clientes();
-					//frame.setVisible(true);
-					//dispose();
-					//Runtime.getRuntime().exit(0);
-					
-					txtNomeCliente.setText("");
-					txtFoneCliente.setText("");
-					txtEmailCliente.setText("");
-					txtEndCliente.setText("");
-				//}
+					Clientes frame = new Clientes();
+					frame.setVisible(true);
+					dispose();
+				}
 				
 			}
 			
@@ -150,8 +143,6 @@ public class CadastrarCliente extends JFrame {
 		});
 		btnSalvar.setBounds(372, 139, 128, 23);
 		contentPane.add(btnSalvar);
-		
-		
 	}
 
 }

@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Principal extends JFrame {
 
@@ -37,8 +39,7 @@ public class Principal extends JFrame {
 	public Principal() {
 
 		/** _________________Configurações do frame_____________________ **/
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		setTitle("ERP - Inicio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 279, 350);
@@ -72,6 +73,10 @@ public class Principal extends JFrame {
 		JButton btnOrcamento = new JButton("Or\u00E7amentos");
 		btnOrcamento.setBounds(64, 234, 129, 23);
 		contentPane.add(btnOrcamento);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(-127, -67, 534, 439);
+		contentPane.add(lblNewLabel);
 		btnOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Orcamentos frame = new Orcamentos();

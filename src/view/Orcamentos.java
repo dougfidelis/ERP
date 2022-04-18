@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 
 public class Orcamentos extends JFrame {
 
@@ -42,8 +43,12 @@ public class Orcamentos extends JFrame {
 		/** __________________Elementos do frame_______________________ **/
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Novo or\u00E7amento");
+		btnNewButton.setBounds(38, 37, 116, 23);
+		contentPane.add(btnNewButton);
 		
 		/** _________________Botões e suas funções_____________________ **/
 
