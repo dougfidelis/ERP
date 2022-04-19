@@ -41,10 +41,7 @@ public class Controller {
 
 		return table;
 		// Retorna a tabela com os dados recebidos da classe Beans
-	}
-	
-	
-	
+	}	
 	
 	public void salvar(Beans cliente) {
 		dao.cadastrarCliente(cliente);

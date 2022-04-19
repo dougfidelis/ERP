@@ -54,10 +54,12 @@ public class Clientes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	private Controller control = new Controller();
+	public static Controller control = new Controller();
+	public static DAO dao = new DAO();
 
 	static JTextField txtCod;
-	public static String codDao = "";
+	public static int codigoSelecionado = 0;
+	public static String codigoSelecionadoString = String.valueOf(codigoSelecionado);
 	public Clientes() {
 		addWindowListener(new WindowAdapter() {
 
@@ -85,14 +87,19 @@ public class Clientes extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 49, 756, 211);
 		contentPane.add(scrollPane);
+		JButton btnEditarCliente = new JButton("Editar cliente");
+		JButton btnRemoverCliente = new JButton("Remover cliente");
 
 		tabelaClientes = new JTable();
 		tabelaClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int linha = tabelaClientes.getSelectedRow();
-				txtCod.setText((tabelaClientes.getValueAt(linha, 0)).toString());
-				codDao=(tabelaClientes.getValueAt(linha, 0)).toString();
+				codigoSelecionado=((Integer) tabelaClientes.getValueAt(linha, 0));
+				ArrayList<Beans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
+				txtCod.setText(String.valueOf(codigoSelecionado));
+				btnEditarCliente.setText("Editar cliente"+" "+String.valueOf(aux.get(0).getCodigoCliente()));
+				btnRemoverCliente.setText("Remover cliente"+" "+String.valueOf(aux.get(0).getCodigoCliente()));
 			}
 		});
 		tabelaClientes.setModel(
@@ -118,12 +125,10 @@ public class Clientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCliente frame = new CadastrarCliente();
 				frame.setVisible(true);
-				dispose();
+				//dispose();
 			}
 		});
 		contentPane.add(btnCadastrarNovoCliente);
-
-		JButton btnRemoverCliente = new JButton("Remover cliente");
 		btnRemoverCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int op = JOptionPane.showConfirmDialog(null, "Confirma a exclusão do cliente selecionado?",
@@ -137,22 +142,15 @@ public class Clientes extends JFrame {
 		});
 		btnRemoverCliente.setBounds(635, 271, 141, 23);
 		contentPane.add(btnRemoverCliente);
-
-		// int linha = tabelaClientes.getSelectedRow();
-		// int codigo = (int) tabelaClientes.getValueAt(linha, 0);
-
-		JButton btnEditarCliente = new JButton("Editar cliente");
 		btnEditarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
-				int linha = tabelaClientes.getSelectedRow();
-				int aux = (int)tabelaClientes.getValueAt(linha, 0);
-				if (Integer.toString(aux).equalsIgnoreCase("")) {
-					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!", -1, 2, null, null,
+			public void actionPerformed(ActionEvent e) {
+				if (codigoSelecionado<=0) {
+					JOptionPane.showOptionDialog(null, "Selecione um cliente!", "Atenção!", -1, 2, null, null,
 							null);
 				} else {
 					EditarCliente frame = new EditarCliente();
 					frame.setVisible(true);
-					dispose();
+					//dispose();
 				}
 			
 			}
@@ -165,7 +163,7 @@ public class Clientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				NovoOrcamento frame = new NovoOrcamento();
 				frame.setVisible(true);
-				dispose();
+				//dispose();
 			}
 		});
 		btnAtualiza.setBounds(20, 271, 141, 23);

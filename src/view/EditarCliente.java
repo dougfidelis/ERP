@@ -42,7 +42,7 @@ public class EditarCliente extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {					
 					EditarCliente frame = new EditarCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -56,53 +56,18 @@ public class EditarCliente extends JFrame {
 	 * Create the frame.
 	 */
 	private DAO dao = new DAO();
-	private Controller control = new Controller();
-	private Clientes c = new Clientes();
-	private static String janela = "";
-	private static String codigoCombo = Clientes.codDao;
-	JComboBox comboBox = new JComboBox();
-	JLabel lblcodDao = new JLabel("X");
-
+	JLabel lblcodDao = new JLabel();
 	public EditarCliente() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				lblcodDao.setText(Clientes.codDao);
-				//int linha = tabelaClientes.getSelectedRow();
-				ArrayList<Beans> aux1 = dao.listarClientes();
-				ArrayList<Beans> aux = dao.selecionarCliente(Integer.parseInt(Clientes.codDao));
+				ArrayList<Beans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
+				lblcodDao.setText(String.valueOf(aux.get(0).getCodigoCliente()));
 				txtNomeCliente.setText(aux.get(0).getNomeCliente());
 				txtFoneCliente.setText(aux.get(0).getFoneCliente());
 				txtEmailCliente.setText(aux.get(0).getEmailCliente());
 				txtEndCliente.setText(aux.get(0).getEndCliente());
-				
-				for (int i = 0; i < aux1.size(); i++) {
-					comboBox.addItem(aux1.get(i).getCodigoCliente());// +"-"+aux.get(i).getNomeCliente());
-					//System.out.println(aux.size());
-					//System.out.println(aux.get(i).getCodigoCliente());
-				}
-				comboBox.addItemListener(new ItemListener() {
-
-					@Override
-					public void itemStateChanged(ItemEvent e) {
-						//
-						if (e.getStateChange() == ItemEvent.SELECTED) {
-
-							codigoCombo = (String) e.getItem();
-
-							// String valorSelecionado = e.getItem().toString();
-							// if(valorSelecionado.equals("ativo")){
-							// altere aqui quando ativo selecionado
-							// }else{
-							// altere aqui quando inativo selecionado
-							// }
-						}
-
-					}
-
-				});
-
 			}
 		});
 
@@ -174,7 +139,7 @@ public class EditarCliente extends JFrame {
 				cliente.setFoneCliente(txtFoneCliente.getText());
 				cliente.setEmailCliente(txtEmailCliente.getText());
 				cliente.setEndCliente(txtEndCliente.getText());
-				cliente.setCodigoCliente(Integer.parseInt(codigoCombo));
+				cliente.setCodigoCliente(Clientes.codigoSelecionado);
 				if (txtNomeCliente.getText().equals("")) {
 					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!", -1, 2, null, null,
 							null);
@@ -182,16 +147,17 @@ public class EditarCliente extends JFrame {
 					JOptionPane.showOptionDialog(null, "Informe o telefone ou o email do cliente!", "Atenção!", -1, 2,
 							null, null, null);
 				} else {
-					dao.updateCliente(cliente);					
-					Clientes frame = new Clientes();
-					frame.setVisible(true);
+					dao.updateCliente(cliente);
+					Clientes.codigoSelecionado = 0;
+					tabelaClientes.setModel(Clientes.control.listarClientes());
 					dispose();
 				}
 			}
 		});
 		btnSalvar.setBounds(360, 103, 128, 38);
 		contentPane.add(btnSalvar);
-		comboBox.setVisible(false);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setVisible(true);
 
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Cliente" }));
 		comboBox.setBounds(61, 54, 269, 22);

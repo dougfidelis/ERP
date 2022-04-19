@@ -84,8 +84,7 @@ public class DAO {
 			pstmt.setInt(1, codigoCliente);
 			pstmt.execute();
 			con.close();
-			JOptionPane.showOptionDialog(null, "Cliente removido com sucesso!", "Remover Cliente", -1, 1, null, null,
-					null);
+			//JOptionPane.showOptionDialog(null, "Cliente removido com sucesso!", "Remover Cliente", -1, 1, null, null,	null);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
