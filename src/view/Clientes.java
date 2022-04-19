@@ -113,7 +113,7 @@ public class Clientes extends JFrame {
 
 		JButton btnCadastrarNovoCliente = new JButton("Cadastrar novo cliente");
 		btnCadastrarNovoCliente.setPreferredSize(new Dimension(100, 23));
-		btnCadastrarNovoCliente.setBounds(228, 271, 141, 23);
+		btnCadastrarNovoCliente.setBounds(205, 271, 187, 23);
 		btnCadastrarNovoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCliente frame = new CadastrarCliente();

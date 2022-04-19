@@ -132,8 +132,8 @@ public class CadastrarCliente extends JFrame {
 							-1, 2, null,null, null);
 				}else {
 					dao.cadastrarCliente(cliente);					
-					Clientes frame = new Clientes();
-					frame.setVisible(true);
+					//Clientes frame = new Clientes();
+					//frame.setVisible(true);
 					dispose();
 				}
 				

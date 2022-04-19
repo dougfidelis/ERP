@@ -13,7 +13,7 @@ public class DAO {
 	/** ______Atributos Conexão_______ **/
 
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/orcamentos?useTimezone=true&serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3306/erp?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
 	private String password = "";
 
