@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
-import model.Beans;
+import model.ClientesBeans;
 import model.DAO;
 
 public class CadastrarCliente extends JFrame {
@@ -122,7 +122,7 @@ public class CadastrarCliente extends JFrame {
 				String fone = txtFoneCliente.getText();
 				String email = txtEmailCliente.getText();
 				String endereco =txtEndCliente.getText();
-				Beans cliente = new Beans(nome, fone, email, endereco);
+				ClientesBeans cliente = new ClientesBeans(nome, fone, email, endereco);
 				if(txtNomeCliente.getText().equals("")) {
 					JOptionPane.showOptionDialog(null, "Informe o nome do cliente!", "Atenção!",
 							-1, 2, null,null, null);

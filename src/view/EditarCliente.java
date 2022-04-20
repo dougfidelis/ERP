@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
-import model.Beans;
+import model.ClientesBeans;
 import model.DAO;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
@@ -62,7 +62,7 @@ public class EditarCliente extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				ArrayList<Beans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
+				ArrayList<ClientesBeans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
 				lblcodDao.setText(String.valueOf(aux.get(0).getCodigoCliente()));
 				txtNomeCliente.setText(aux.get(0).getNomeCliente());
 				txtFoneCliente.setText(aux.get(0).getFoneCliente());
@@ -134,7 +134,7 @@ public class EditarCliente extends JFrame {
 			private Object frame;
 
 			public void actionPerformed(ActionEvent e) {
-				Beans cliente = new Beans();
+				ClientesBeans cliente = new ClientesBeans();
 				cliente.setNomeCliente(txtNomeCliente.getText());
 				cliente.setFoneCliente(txtFoneCliente.getText());
 				cliente.setEmailCliente(txtEmailCliente.getText());

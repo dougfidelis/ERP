@@ -24,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
-import model.Beans;
+import model.ClientesBeans;
 import model.DAO;
 import java.awt.event.WindowEvent;
 import javax.swing.JScrollBar;
@@ -97,7 +97,7 @@ public class Clientes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int linha = tabelaClientes.getSelectedRow();
 				codigoSelecionado = ((Integer) tabelaClientes.getValueAt(linha, 0));
-				ArrayList<Beans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
+				ArrayList<ClientesBeans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
 				txtCod.setText(String.valueOf(codigoSelecionado));
 				btnEditarCliente.setText("Editar cliente" + " " + String.valueOf(aux.get(0).getCodigoCliente()));
 				btnRemoverCliente.setText("Remover cliente" + " " + String.valueOf(aux.get(0).getCodigoCliente()));

@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
-import model.Beans;
+import model.ClientesBeans;
 import model.DAO;
 import view.Clientes;
 import view.EditarCliente;
@@ -18,7 +18,7 @@ public class Controller {
 	public DefaultTableModel listarClientes() {
 		// Método para preencher a tabela de dados cliente
 
-		ArrayList<Beans> orcamento = dao.listarClientes();
+		ArrayList<ClientesBeans> orcamento = dao.listarClientes();
 		// Cria um objeto para receber os dados da classe Beans
 
 		DefaultTableModel table = (DefaultTableModel) Clientes.tabelaClientes.getModel();
@@ -28,13 +28,13 @@ public class Controller {
 			table.setRowCount(0);
 		}// Zera as tabela criada para adicionar os dados do banco		
 
-		for (Beans item : orcamento) {
+		for (ClientesBeans item : orcamento) {
 			Object[] linha = new Object[5];
-			linha[0] = ((Beans) item).getCodigoCliente();
-			linha[1] = ((Beans) item).getNomeCliente();
-			linha[2] = ((Beans) item).getFoneCliente();
-			linha[3] = ((Beans) item).getEmailCliente();
-			linha[4] = ((Beans) item).getEndCliente();
+			linha[0] = ((ClientesBeans) item).getCodigoCliente();
+			linha[1] = ((ClientesBeans) item).getNomeCliente();
+			linha[2] = ((ClientesBeans) item).getFoneCliente();
+			linha[3] = ((ClientesBeans) item).getEmailCliente();
+			linha[4] = ((ClientesBeans) item).getEndCliente();
 			table.addRow(linha);
 			// Preenche a tabela com os dados recebidos da classe Beans
 		}
@@ -43,7 +43,7 @@ public class Controller {
 		// Retorna a tabela com os dados recebidos da classe Beans
 	}	
 	
-	public void salvar(Beans cliente) {
+	public void salvar(ClientesBeans cliente) {
 		dao.cadastrarCliente(cliente);
 	}
 	
@@ -51,15 +51,15 @@ public class Controller {
 		dao.removerCliente(codigoCliente);
 	}	
 	
-	public ArrayList<Beans> selecionarCliente() {
-		ArrayList<Beans> cliente = dao.listarClientes();
-		for (Beans item : cliente) {
+	public ArrayList<ClientesBeans> selecionarCliente() {
+		ArrayList<ClientesBeans> cliente = dao.listarClientes();
+		for (ClientesBeans item : cliente) {
 			Object[] linha = new Object[5];
-			linha[0] = ((Beans) item).getCodigoCliente();
-			linha[1] = ((Beans) item).getNomeCliente();
-			linha[2] = ((Beans) item).getFoneCliente();
-			linha[3] = ((Beans) item).getEmailCliente();
-			linha[4] = ((Beans) item).getEndCliente();
+			linha[0] = ((ClientesBeans) item).getCodigoCliente();
+			linha[1] = ((ClientesBeans) item).getNomeCliente();
+			linha[2] = ((ClientesBeans) item).getFoneCliente();
+			linha[3] = ((ClientesBeans) item).getEmailCliente();
+			linha[4] = ((ClientesBeans) item).getEndCliente();
 		}
 		return cliente;
 	}

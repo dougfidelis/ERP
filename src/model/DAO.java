@@ -32,8 +32,8 @@ public class DAO {
 	}
 
 	/** Método para listar clientes **/
-	public ArrayList<Beans> listarClientes() {
-		ArrayList<Beans> clientes = new ArrayList<>();
+	public ArrayList<ClientesBeans> listarClientes() {
+		ArrayList<ClientesBeans> clientes = new ArrayList<>();
 		String sql = "select * from cliente order by nomeCliente";
 		try {
 			Connection con = conectar();
@@ -45,7 +45,7 @@ public class DAO {
 				String foneCliente = rs.getString(3);
 				String emailCliente = rs.getString(4);
 				String endCliente = rs.getString(5);
-				clientes.add(new Beans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
+				clientes.add(new ClientesBeans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
 			}
 			con.close();
 			return clientes;
@@ -56,7 +56,7 @@ public class DAO {
 	}
 
 	/** Método para cadastrar clientes **/
-	public void cadastrarCliente(Beans cliente) {
+	public void cadastrarCliente(ClientesBeans cliente) {
 		String sqlCreate = "insert into cliente (nomeCliente, foneCliente, emailCliente, endCliente) values (?,?,?,?)";
 		try {
 			Connection con = conectar();
@@ -91,8 +91,8 @@ public class DAO {
 
 	}
 
-	public ArrayList<Beans> selecionarCliente(int codigo) {
-		ArrayList<Beans> cliente = new ArrayList<Beans>();
+	public ArrayList<ClientesBeans> selecionarCliente(int codigo) {
+		ArrayList<ClientesBeans> cliente = new ArrayList<ClientesBeans>();
 		String sql = "select * from cliente WHERE codigoCliente = ?";
 		try {
 			Connection con = conectar();
@@ -106,7 +106,7 @@ public class DAO {
 				String foneCliente = rs.getString(3);
 				String emailCliente = rs.getString(4);
 				String endCliente = rs.getString(5);
-				cliente.add(new Beans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
+				cliente.add(new ClientesBeans(codigoCliente, nomeCliente, foneCliente, emailCliente, endCliente));
 			}
 			con.close();
 			return cliente;
@@ -116,7 +116,7 @@ public class DAO {
 		}
 	}
 
-	public void updateCliente(Beans cliente) {
+	public void updateCliente(ClientesBeans cliente) {
 		String sqlCreate = "update cliente set nomeCliente = ?, foneCliente = ?, emailCliente = ?,  endCliente = ? WHERE codigoCliente = ?";
 		try {
 			Connection con = conectar();

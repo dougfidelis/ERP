@@ -1,6 +1,6 @@
 package model;
 
-public class Beans {
+public class ClientesBeans {
 
 	/** ______Atributos Clientes_______ **/
 	private int codigoCliente;
@@ -11,7 +11,7 @@ public class Beans {
 
 	/** _____Construtores Clientes_____ **/
 
-	public Beans(String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
+	public ClientesBeans(String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
 		super();
 		this.nomeCliente = nomeCliente;
 		this.foneCliente = foneCliente;
@@ -19,15 +19,15 @@ public class Beans {
 		this.endCliente = endCliente;
 	}
 
-	public Beans() {
+	public ClientesBeans() {
 	}
 
-	public Beans(int codigoCliente) {
+	public ClientesBeans(int codigoCliente) {
 		super();
 		this.codigoCliente = codigoCliente;
 	}
 
-	public Beans(int codigoCliente, String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
+	public ClientesBeans(int codigoCliente, String nomeCliente, String foneCliente, String emailCliente, String endCliente) {
 		super();
 		this.codigoCliente = codigoCliente;
 		this.nomeCliente = nomeCliente;

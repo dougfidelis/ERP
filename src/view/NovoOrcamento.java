@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.w3c.dom.CharacterData;
 
-import model.Beans;
+import model.ClientesBeans;
 import javax.swing.JFormattedTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -77,7 +77,7 @@ public class NovoOrcamento extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				ArrayList<Beans> cliente = Clientes.dao.selecionarCliente(Clientes.codigoSelecionado);
+				ArrayList<ClientesBeans> cliente = Clientes.dao.selecionarCliente(Clientes.codigoSelecionado);
 				//lblcodDao.setText(String.valueOf(aux.get(0).getCodigoCliente()));
 				txtNomeCliente.setText(cliente.get(0).getNomeCliente());
 				txtFoneCliente.setText(cliente.get(0).getFoneCliente());
