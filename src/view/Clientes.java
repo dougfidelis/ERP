@@ -60,6 +60,7 @@ public class Clientes extends JFrame {
 	static JTextField txtCod;
 	public static int codigoSelecionado = 0;
 	public static String codigoSelecionadoString = String.valueOf(codigoSelecionado);
+
 	public Clientes() {
 		addWindowListener(new WindowAdapter() {
 
@@ -95,22 +96,15 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int linha = tabelaClientes.getSelectedRow();
-				codigoSelecionado=((Integer) tabelaClientes.getValueAt(linha, 0));
+				codigoSelecionado = ((Integer) tabelaClientes.getValueAt(linha, 0));
 				ArrayList<Beans> aux = dao.selecionarCliente(Clientes.codigoSelecionado);
 				txtCod.setText(String.valueOf(codigoSelecionado));
-				btnEditarCliente.setText("Editar cliente"+" "+String.valueOf(aux.get(0).getCodigoCliente()));
-				btnRemoverCliente.setText("Remover cliente"+" "+String.valueOf(aux.get(0).getCodigoCliente()));
+				btnEditarCliente.setText("Editar cliente" + " " + String.valueOf(aux.get(0).getCodigoCliente()));
+				btnRemoverCliente.setText("Remover cliente" + " " + String.valueOf(aux.get(0).getCodigoCliente()));
 			}
 		});
-		tabelaClientes.setModel(
-				new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"C\u00F3digo", "Nome", "Fone", "E-mail", "Endere\u00E7o"
-			}
-		));
+		tabelaClientes.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+				new String[] { "C\u00F3digo", "Nome", "Fone", "E-mail", "Endere\u00E7o" }));
 		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(167);
 		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(114);
 		tabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(177);
@@ -125,7 +119,7 @@ public class Clientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCliente frame = new CadastrarCliente();
 				frame.setVisible(true);
-				//dispose();
+				// dispose();
 			}
 		});
 		contentPane.add(btnCadastrarNovoCliente);
@@ -144,27 +138,31 @@ public class Clientes extends JFrame {
 		contentPane.add(btnRemoverCliente);
 		btnEditarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (codigoSelecionado<=0) {
-					JOptionPane.showOptionDialog(null, "Selecione um cliente!", "Atenção!", -1, 2, null, null,
-							null);
+				if (codigoSelecionado <= 0) {
+					JOptionPane.showOptionDialog(null, "Selecione um cliente!", "Atenção!", -1, 2, null, null, null);
 				} else {
 					EditarCliente frame = new EditarCliente();
 					frame.setVisible(true);
-					//dispose();
+					// dispose();
 				}
-			
+
 			}
 		});
 		btnEditarCliente.setBounds(432, 271, 141, 23);
 		contentPane.add(btnEditarCliente);
-
-		JButton btnAtualiza = new JButton("Novo orcamento");		
+		JButton btnAtualiza = new JButton("Novo orcamento");
 		btnAtualiza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NovoOrcamento frame = new NovoOrcamento();
-				frame.setVisible(true);
-				//dispose();
+				if (codigoSelecionado <= 0) {
+					JOptionPane.showOptionDialog(null, "Selecione um cliente!", "Atenção!", -1, 2, null, null, null);
+				} else {
+					NovoOrcamento frame = new NovoOrcamento();
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					frame.setVisible(true);
+					// dispose();
+				}
 			}
+
 		});
 		btnAtualiza.setBounds(20, 271, 141, 23);
 		contentPane.add(btnAtualiza);
@@ -173,7 +171,7 @@ public class Clientes extends JFrame {
 		txtCod.setBounds(511, 305, 60, 20);
 		contentPane.add(txtCod);
 		txtCod.setColumns(10);
-		
+
 		JButton btnVoltarAoInicio = new JButton("Voltar ao inicio");
 		btnVoltarAoInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -1,42 +1,57 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JDesktopPane;
-import javax.swing.JLabel;
-import java.awt.Scrollbar;
-import java.awt.Component;
-import javax.swing.ScrollPaneConstants;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import org.w3c.dom.CharacterData;
+
+import model.Beans;
+import javax.swing.JFormattedTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class NovoOrcamento extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtFoneCliente;
+	private JTextField txtEmailCliente;
 	private JTextField txtEndCliente;
-	private JTextField txtNomeDoCliente;
-	private JTextField textField_4;
-	private JTextField txtCodclientecodorcamento;
+	private JTextField txtNomeCliente;
+	private JTextField txtData;
+	private JTextField txtCodigoOrcamento;
 	private JTable table;
-	private JTable table_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_4;
+	
 
 	/**
 	 * Launch the application.
@@ -46,6 +61,7 @@ public class NovoOrcamento extends JFrame {
 			public void run() {
 				try {
 					NovoOrcamento frame = new NovoOrcamento();
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,103 +74,96 @@ public class NovoOrcamento extends JFrame {
 	 * Create the frame.
 	 */
 	public NovoOrcamento() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				ArrayList<Beans> cliente = Clientes.dao.selecionarCliente(Clientes.codigoSelecionado);
+				//lblcodDao.setText(String.valueOf(aux.get(0).getCodigoCliente()));
+				txtNomeCliente.setText(cliente.get(0).getNomeCliente());
+				txtFoneCliente.setText(cliente.get(0).getFoneCliente());
+				txtEmailCliente.setText(cliente.get(0).getEmailCliente());
+				txtEndCliente.setText(cliente.get(0).getEndCliente());
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				Date data = new Date();				 
+				txtData.setText((String) dateFormat.format(data));
+			}
+		});
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 614, 726);
+		setBounds(100, 100, 616, 726);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JLabel lblNovoOramento = new JLabel("Novo or\u00E7amento");
+		JLabel lblNovoOramento = new JLabel("Or\u00E7amento Numero:");
+		lblNovoOramento.setBounds(10, 0, 269, 49);
 		lblNovoOramento.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNovoOramento.setBounds(10, 11, 227, 42);
-		contentPane.add(lblNovoOramento);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nome");
+		lblNewLabel_1.setBounds(10, 61, 46, 14);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_1.setBounds(10, 89, 46, 14);
-		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("End.");
+		lblNewLabel_2.setBounds(10, 91, 46, 14);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(10, 119, 46, 14);
-		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Email");
+		lblNewLabel_3.setBounds(10, 119, 48, 14);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3.setBounds(10, 147, 48, 14);
-		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblFone = new JLabel("Fone");
+		lblFone.setBounds(347, 91, 53, 14);
 		lblFone.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblFone.setBounds(350, 89, 53, 14);
-		contentPane.add(lblFone);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(395, 88, 194, 20);
-		contentPane.add(textField);
+		txtFoneCliente = new JTextField();
+		txtFoneCliente.setBounds(395, 89, 194, 20);
+		txtFoneCliente.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(53, 145, 269, 20);
-		contentPane.add(textField_1);
+		txtEmailCliente = new JTextField();
+		txtEmailCliente.setBounds(53, 117, 269, 20);
+		txtEmailCliente.setColumns(10);
 		
 		txtEndCliente = new JTextField();
+		txtEndCliente.setBounds(53, 89, 269, 20);
 		txtEndCliente.setText("End Cliente");
 		txtEndCliente.setColumns(10);
-		txtEndCliente.setBounds(53, 117, 269, 20);
-		contentPane.add(txtEndCliente);
 		
-		txtNomeDoCliente = new JTextField();
-		txtNomeDoCliente.setText("Nome Cliente");
-		txtNomeDoCliente.setColumns(10);
-		txtNomeDoCliente.setBounds(53, 89, 269, 20);
-		contentPane.add(txtNomeDoCliente);
+		txtNomeCliente = new JTextField();
+		txtNomeCliente.setBounds(53, 61, 269, 20);
+		txtNomeCliente.setText("Nome Cliente");
+		txtNomeCliente.setColumns(10);
 		
 		JLabel lblData = new JLabel("Data");
+		lblData.setBounds(347, 119, 53, 14);
 		lblData.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblData.setBounds(350, 121, 53, 14);
-		contentPane.add(lblData);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(395, 118, 194, 20);
-		contentPane.add(textField_4);
+		txtData = new JTextField();
+		txtData.setBounds(395, 117, 194, 20);
+		txtData.setColumns(10);
 		
-		txtCodclientecodorcamento = new JTextField();
-		txtCodclientecodorcamento.setText("codCliente+codOrcamento");
-		txtCodclientecodorcamento.setColumns(10);
-		txtCodclientecodorcamento.setBounds(444, 146, 145, 20);
-		contentPane.add(txtCodclientecodorcamento);
+		txtCodigoOrcamento = new JTextField();
+		txtCodigoOrcamento.setBounds(274, 11, 46, 30);
+		txtCodigoOrcamento.setText("codCliente+codOrcamento");
+		txtCodigoOrcamento.setColumns(10);
 		
-		JLabel lblNumero = new JLabel("N\u00B0 or\u00E7amento");
-		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNumero.setBounds(350, 149, 98, 14);
-		contentPane.add(lblNumero);
-		
-		JLabel lblMateriais = new JLabel("Materiais");
+		JLabel lblMateriais = new JLabel("Itens");
+		lblMateriais.setBounds(10, 283, 79, 20);
 		lblMateriais.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMateriais.setBounds(10, 202, 79, 20);
-		contentPane.add(lblMateriais);
 		
 		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.setBounds(112, 203, 89, 23);
-		contentPane.add(btnNewButton);
+		btnNewButton.setBounds(112, 284, 89, 23);
 		
 		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(227, 203, 89, 23);
-		contentPane.add(btnRemover);
+		btnRemover.setBounds(227, 284, 89, 23);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(336, 203, 89, 23);
-		contentPane.add(btnEditar);
+		btnEditar.setBounds(336, 284, 89, 23);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 233, 579, 113);
-		contentPane.add(scrollPane);
+		scrollPane.setBounds(10, 318, 579, 341);
 		
 		table = new JTable();
+				
+			
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null},
@@ -175,129 +184,121 @@ public class NovoOrcamento extends JFrame {
 		table.getColumnModel().getColumn(4).setMinWidth(70);
 		scrollPane.setViewportView(table);
 		
-		JLabel lblCustos = new JLabel("Custos");
-		lblCustos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCustos.setBounds(10, 379, 114, 20);
-		contentPane.add(lblCustos);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 410, 579, 113);
-		contentPane.add(scrollPane_1);
-		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, "", null, null},
-			},
-			new String[] {
-				"C\u00F3digo", "Tipo", "Descri\u00E7\u00E3o", "Valor Unidade", "QTD", "Sub Total"
-			}
-		));
-		table_1.getColumnModel().getColumn(0).setPreferredWidth(45);
-		table_1.getColumnModel().getColumn(0).setMinWidth(45);
-		table_1.getColumnModel().getColumn(1).setPreferredWidth(80);
-		table_1.getColumnModel().getColumn(1).setMinWidth(80);
-		table_1.getColumnModel().getColumn(2).setPreferredWidth(300);
-		table_1.getColumnModel().getColumn(2).setMinWidth(250);
-		table_1.getColumnModel().getColumn(3).setPreferredWidth(70);
-		table_1.getColumnModel().getColumn(3).setMinWidth(70);
-		table_1.getColumnModel().getColumn(4).setPreferredWidth(45);
-		table_1.getColumnModel().getColumn(4).setMinWidth(45);
-		table_1.getColumnModel().getColumn(5).setPreferredWidth(70);
-		table_1.getColumnModel().getColumn(5).setMinWidth(70);
-		scrollPane_1.setViewportView(table_1);
-		
-		JButton btnNewButton_1 = new JButton("Adicionar");
-		btnNewButton_1.setBounds(112, 379, 89, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnRemover_1 = new JButton("Remover");
-		btnRemover_1.setBounds(227, 379, 89, 23);
-		contentPane.add(btnRemover_1);
-		
-		JButton btnEditar_1 = new JButton("Editar");
-		btnEditar_1.setBounds(336, 379, 89, 23);
-		contentPane.add(btnEditar_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Informa\u00E7\u00F5es do cliente");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1_1.setBounds(10, 64, 205, 14);
-		contentPane.add(lblNewLabel_1_1);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 55, 579, 126);
-		contentPane.add(separator);
-		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 181, 579, 151);
-		contentPane.add(separator_1);
-		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(10, 363, 579, 163);
-		contentPane.add(separator_2);
+		separator_1.setBounds(10, 271, 579, 36);
 		
 		JLabel lblValorTotal = new JLabel("Valor total");
+		lblValorTotal.setBounds(413, 170, 114, 20);
 		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblValorTotal.setBounds(475, 549, 114, 20);
-		contentPane.add(lblValorTotal);
 		
 		textField_2 = new JTextField();
+		textField_2.setBounds(233, 170, 89, 20);
 		textField_2.setColumns(10);
-		textField_2.setBounds(451, 576, 138, 20);
-		contentPane.add(textField_2);
 		
-		JLabel lblArquiteto = new JLabel("Arquiteto - %");
+		JLabel lblArquiteto = new JLabel("Arquiteto ");
+		lblArquiteto.setBounds(10, 146, 79, 14);
 		lblArquiteto.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblArquiteto.setBounds(10, 549, 98, 14);
-		contentPane.add(lblArquiteto);
 		
 		JLabel lblImposto = new JLabel("Imposto %");
+		lblImposto.setBounds(10, 172, 79, 14);
 		lblImposto.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblImposto.setBounds(312, 549, 79, 14);
-		contentPane.add(lblImposto);
 		
 		textField_3 = new JTextField();
+		textField_3.setBounds(94, 143, 114, 20);
 		textField_3.setColumns(10);
-		textField_3.setBounds(112, 549, 114, 20);
-		contentPane.add(textField_3);
 		
 		textField_5 = new JTextField();
+		textField_5.setBounds(276, 143, 46, 20);
 		textField_5.setColumns(10);
-		textField_5.setBounds(236, 549, 46, 20);
-		contentPane.add(textField_5);
 		
 		textField_6 = new JTextField();
+		textField_6.setBounds(94, 170, 46, 20);
 		textField_6.setColumns(10);
-		textField_6.setBounds(395, 547, 46, 20);
-		contentPane.add(textField_6);
 		
 		JLabel lblPrazoEntrega = new JLabel("Prazo entrega");
+		lblPrazoEntrega.setBounds(349, 145, 98, 14);
 		lblPrazoEntrega.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPrazoEntrega.setBounds(10, 578, 98, 14);
-		contentPane.add(lblPrazoEntrega);
 		
 		textField_7 = new JTextField();
+		textField_7.setBounds(444, 143, 145, 20);
 		textField_7.setColumns(10);
-		textField_7.setBounds(112, 576, 170, 20);
-		contentPane.add(textField_7);
 		
 		JLabel lblValidade = new JLabel("Validade");
+		lblValidade.setBounds(482, 63, 63, 14);
 		lblValidade.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblValidade.setBounds(312, 578, 79, 14);
-		contentPane.add(lblValidade);
 		
 		textField_8 = new JTextField();
+		textField_8.setBounds(543, 62, 46, 18);
 		textField_8.setColumns(10);
-		textField_8.setBounds(395, 576, 46, 20);
-		contentPane.add(textField_8);
 		
 		JTextPane txtpnKjbidhnfabsadpiSdkfjhasfhasf = new JTextPane();
+		txtpnKjbidhnfabsadpiSdkfjhasfhasf.setBounds(10, 690, 579, 57);
 		txtpnKjbidhnfabsadpiSdkfjhasfhasf.setText("kjbidhnfa\u00E7bsadpi\r\nsdkfjhasfhasf");
-		txtpnKjbidhnfabsadpiSdkfjhasfhasf.setBounds(10, 603, 579, 57);
+		contentPane.setLayout(null);
+		contentPane.add(lblNovoOramento);
+		contentPane.add(btnEditar);
+		contentPane.add(lblMateriais);
+		contentPane.add(btnRemover);
+		contentPane.add(btnNewButton);
+		contentPane.add(scrollPane);
+		contentPane.add(separator_1);
+		contentPane.add(txtNomeCliente);
+		contentPane.add(lblNewLabel_2);
+		contentPane.add(txtEndCliente);
+		contentPane.add(lblNewLabel_3);
+		contentPane.add(txtEmailCliente);
+		contentPane.add(txtFoneCliente);
+		contentPane.add(lblFone);
+		contentPane.add(txtData);
+		contentPane.add(lblData);
+		contentPane.add(txtCodigoOrcamento);
+		contentPane.add(lblNewLabel_1);
+		contentPane.add(lblPrazoEntrega);
+		contentPane.add(textField_3);
+		contentPane.add(lblImposto);
+		contentPane.add(textField_6);
+		contentPane.add(textField_8);
+		contentPane.add(lblValorTotal);
+		contentPane.add(lblArquiteto);
+		contentPane.add(textField_2);
+		contentPane.add(textField_7);
 		contentPane.add(txtpnKjbidhnfabsadpiSdkfjhasfhasf);
+		contentPane.add(lblValidade);
+		contentPane.add(textField_5);
 		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(10, 536, 579, 135);
-		contentPane.add(separator_3);
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o");
+		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblSituao.setBounds(162, 174, 63, 14);
+		contentPane.add(lblSituao);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(389, 195, 138, 20);
+		contentPane.add(textField);
+		
+		JLabel lblFormasDePagamento = new JLabel("Formas  pgto");
+		lblFormasDePagamento.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblFormasDePagamento.setBounds(10, 197, 145, 14);
+		contentPane.add(lblFormasDePagamento);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(94, 195, 228, 20);
+		contentPane.add(textField_1);
+		
+		JLabel lblRt = new JLabel("RT");
+		lblRt.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblRt.setBounds(245, 145, 29, 14);
+		contentPane.add(lblRt);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(430, 62, 35, 18);
+		contentPane.add(textField_4);
+		
+		JLabel lblCdigoCliente = new JLabel("C\u00F3d. Cliente");
+		lblCdigoCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCdigoCliente.setBounds(347, 62, 100, 14);
+		contentPane.add(lblCdigoCliente);
 	}
 }

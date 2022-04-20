@@ -1,10 +1,8 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import model.Beans;
-import model.DAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Teste {
 
@@ -27,18 +25,14 @@ public class Teste {
 		// if (op == JOptionPane.CANCEL_OPTION)
 		// System.out.println("CANCEL");
 
-		DAO dao = new DAO();
-		// ArrayList<Beans> cliente = dao.selecionarCliente(37);
-		// String nome = cliente.get(0).getNomeCliente();
-		// System.out.println(nome);
-		ArrayList<Beans> aux = dao.listarClientes();
-		String nome = (aux.get(0).getNomeCliente());
-		String fone = (aux.get(0).getFoneCliente());
-		String email = (aux.get(0).getEmailCliente());
-		String end = (aux.get(0).getEndCliente());
-		for (int i = 0; i < aux.size(); i++) {
-			System.out.println(aux.get(i).getCodigoCliente());
-		}
+		
+
+		
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			Date date = new Date();			
+			String data = dateFormat.format(date);
+			System.out.println(data);
+	
 
 	}
 

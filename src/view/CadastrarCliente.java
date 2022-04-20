@@ -56,8 +56,7 @@ public class CadastrarCliente extends JFrame {
 		addWindowListener(new WindowAdapter() {			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				Clientes frame = new Clientes();
-				frame.setVisible(true);
+				
 			}
 });
 		/** _________________Configurações do frame_____________________ **/
@@ -131,7 +130,8 @@ public class CadastrarCliente extends JFrame {
 					JOptionPane.showOptionDialog(null, "Informe o telefone ou o email do cliente!", "Atenção!",
 							-1, 2, null,null, null);
 				}else {
-					dao.cadastrarCliente(cliente);					
+					dao.cadastrarCliente(cliente);
+					tabelaClientes.setModel(control.listarClientes());
 					//Clientes frame = new Clientes();
 					//frame.setVisible(true);
 					dispose();
