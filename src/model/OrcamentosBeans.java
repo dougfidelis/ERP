@@ -14,10 +14,24 @@ public class OrcamentosBeans {
 	private String emissao;
 	private String formPgto;
 	private String situacao;
-	
-	
-	
-	
+	private int codigoCliente;
+		
+	public OrcamentosBeans(int codigoOrcamento, int validade, int entrega, double rt, double imposto, double valor,
+			String arquiteto, String emissao, String formPgto, String situacao, int codigoCliente) {
+		super();
+		this.codigoOrcamento = codigoOrcamento;
+		this.validade = validade;
+		this.entrega = entrega;
+		this.rt = rt;
+		this.imposto = imposto;
+		this.valor = valor;
+		this.arquiteto = arquiteto;
+		this.emissao = emissao;
+		this.formPgto = formPgto;
+		this.situacao = situacao;
+		this.codigoCliente = codigoCliente;
+		
+	}
 	public int getCodigoOrcamento() {
 		return codigoOrcamento;
 	}
@@ -60,11 +74,11 @@ public class OrcamentosBeans {
 	public void setArquiteto(String arquiteto) {
 		this.arquiteto = arquiteto;
 	}
-	public String getData() {
+	public String getEmissao() {
 		return emissao;
 	}
-	public void setData(String data) {
-		this.emissao = data;
+	public void setEmissao(String emissao) {
+		this.emissao = emissao;
 	}
 	public String getFormPgto() {
 		return formPgto;
@@ -77,6 +91,12 @@ public class OrcamentosBeans {
 	}
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
+	}
+	public int getCodigoCliente() {
+		return codigoCliente;
+	}
+	public void setCodigoCliente(int codigoCliente) {
+		this.codigoCliente = codigoCliente;
 	}
 	
 	
