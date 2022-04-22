@@ -113,6 +113,10 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+select * from corredicas;
+
+
+
 
 -- -----------------------------------------------------
 -- Table `db_erp`.`custosorcamento`
@@ -123,12 +127,12 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`custosorcamento` (
   `valor` DOUBLE NOT NULL,
   `quantidade` DOUBLE NOT NULL,
   `subTotal` DOUBLE NOT NULL,
-  `codigoOrcamento` INT UNSIGNED NOT NULL,
+  `codigoItem` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`codigoCusto`),
-  INDEX `fk_custos` (`codigoOrcamento` ASC) VISIBLE,
+  INDEX `fk_custos` (`codigoItem` ASC) VISIBLE,
   CONSTRAINT `fk_custos`
-    FOREIGN KEY (`codigoOrcamento`)
-    REFERENCES `db_erp`.`orcamento` (`codigoOrcamento`)
+    FOREIGN KEY (`codigoItem`)
+    REFERENCES `db_erp`.`itensorcamento` (`codigoItem`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB

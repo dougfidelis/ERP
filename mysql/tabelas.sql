@@ -16,13 +16,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `estoque` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 -- -----------------------------------------------------
--- Schema db_erp
+-- Schema db_erp1
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema db_erp
+-- Schema db_erp1
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db_erp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `db_erp1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `estoque` ;
 
 -- -----------------------------------------------------
@@ -42,12 +42,12 @@ AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-USE `db_erp` ;
+USE `db_erp1` ;
 
 -- -----------------------------------------------------
--- Table `db_erp`.`cliente`
+-- Table `db_erp1`.`cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`cliente` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`cliente` (
   `codigoCliente` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nomeCliente` VARCHAR(30) NOT NULL,
   `foneCliente` VARCHAR(30) NULL DEFAULT NULL,
@@ -61,9 +61,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `db_erp`.`orcamento`
+-- Table `db_erp1`.`orcamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`orcamento` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`orcamento` (
   `codigoOrcamento` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `validade` INT NULL DEFAULT NULL,
   `entrega` INT NULL DEFAULT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`orcamento` (
   INDEX `fk_codigoCliente` (`codigoCliente` ASC) VISIBLE,
   CONSTRAINT `fk_codigoCliente`
     FOREIGN KEY (`codigoCliente`)
-    REFERENCES `db_erp`.`cliente` (`codigoCliente`)
+    REFERENCES `db_erp1`.`cliente` (`codigoCliente`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB
@@ -89,9 +89,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `db_erp`.`itensorcamento`
+-- Table `db_erp1`.`itensorcamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`itensorcamento` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`itensorcamento` (
   `codigoItem` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(30) NOT NULL,
   `observacao` TEXT NULL DEFAULT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`itensorcamento` (
   INDEX `fk_itens` (`codigoOrcamento` ASC) VISIBLE,
   CONSTRAINT `fk_itens`
     FOREIGN KEY (`codigoOrcamento`)
-    REFERENCES `db_erp`.`orcamento` (`codigoOrcamento`)
+    REFERENCES `db_erp1`.`orcamento` (`codigoOrcamento`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB
@@ -111,11 +111,13 @@ AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+select * from itensorcamento;
+
 
 -- -----------------------------------------------------
--- Table `db_erp`.`materiais`
+-- Table `db_erp1`.`materiais`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`materiais` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`materiais` (
   `codigoMaterial` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(30) NOT NULL,
   `valor` DOUBLE NOT NULL,
@@ -126,18 +128,20 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`materiais` (
   INDEX `fk_custos0_idx` (`codigoItem` ASC) VISIBLE,
   CONSTRAINT `fk_custos0`
     FOREIGN KEY (`codigoItem`)
-    REFERENCES `db_erp`.`itensorcamento` (`codigoItem`)
+    REFERENCES `db_erp1`.`itensorcamento` (`codigoItem`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+select * from materiais;
+
 
 -- -----------------------------------------------------
--- Table `db_erp`.`chapas`
+-- Table `db_erp1`.`chapas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`chapas` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`chapas` (
   `cd_chapa` INT NOT NULL,
   `ds_chapa` VARCHAR(45) NOT NULL,
   `qtd_chapa` DOUBLE NOT NULL,
@@ -147,16 +151,18 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`chapas` (
   INDEX `fk_chapa_idx` (`codigoMaterial` ASC) VISIBLE,
   CONSTRAINT `fk_chapa`
     FOREIGN KEY (`codigoMaterial`)
-    REFERENCES `db_erp`.`materiais` (`codigoMaterial`))
+    REFERENCES `db_erp1`.`materiais` (`codigoMaterial`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+select * from chapas;
+
 
 -- -----------------------------------------------------
--- Table `db_erp`.`corredicas`
+-- Table `db_erp1`.`corredicas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`corredicas` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`corredicas` (
   `cd_corredica` INT NOT NULL,
   `ds_corredica` VARCHAR(45) NOT NULL,
   `qtd_corredica` DOUBLE NOT NULL,
@@ -166,16 +172,16 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`corredicas` (
   INDEX `fk_corredica_idx` (`codigoMaterial` ASC) VISIBLE,
   CONSTRAINT `fk_corredica`
     FOREIGN KEY (`codigoMaterial`)
-    REFERENCES `db_erp`.`materiais` (`codigoMaterial`))
+    REFERENCES `db_erp1`.`materiais` (`codigoMaterial`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `db_erp`.`custos`
+-- Table `db_erp1`.`custos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`custos` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`custos` (
   `codigoCusto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(30) NOT NULL,
   `valor` DOUBLE NOT NULL,
@@ -186,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`custos` (
   INDEX `fk_custos_idx` (`codigoItem` ASC) VISIBLE,
   CONSTRAINT `fk_custos`
     FOREIGN KEY (`codigoItem`)
-    REFERENCES `db_erp`.`itensorcamento` (`codigoItem`)
+    REFERENCES `db_erp1`.`itensorcamento` (`codigoItem`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB
@@ -195,9 +201,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `db_erp`.`fitas`
+-- Table `db_erp1`.`fitas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`fitas` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`fitas` (
   `cd_fita` INT NOT NULL,
   `ds_fita` VARCHAR(45) NOT NULL,
   `qtd_fita` DOUBLE NOT NULL,
@@ -207,16 +213,16 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`fitas` (
   INDEX `fk_fita_idx` (`codigoMaterial` ASC) VISIBLE,
   CONSTRAINT `fk_fita`
     FOREIGN KEY (`codigoMaterial`)
-    REFERENCES `db_erp`.`materiais` (`codigoMaterial`))
+    REFERENCES `db_erp1`.`materiais` (`codigoMaterial`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `db_erp`.`estoque`
+-- Table `db_erp1`.`estoque`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`estoque` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`estoque` (
   `codigoEstoque` INT NOT NULL AUTO_INCREMENT,
   `chapas` VARCHAR(45) NULL DEFAULT NULL,
   `cd_chapas` INT NULL DEFAULT NULL,
@@ -230,22 +236,22 @@ CREATE TABLE IF NOT EXISTS `db_erp`.`estoque` (
   INDEX `fk_corredicas_idx` (`cd_corredicas` ASC) VISIBLE,
   CONSTRAINT `fk_chapas`
     FOREIGN KEY (`cd_chapas`)
-    REFERENCES `db_erp`.`chapas` (`cd_chapa`),
+    REFERENCES `db_erp1`.`chapas` (`cd_chapa`),
   CONSTRAINT `fk_corredicas`
     FOREIGN KEY (`cd_corredicas`)
-    REFERENCES `db_erp`.`corredicas` (`cd_corredica`),
+    REFERENCES `db_erp1`.`corredicas` (`cd_corredica`),
   CONSTRAINT `fk_fitas`
     FOREIGN KEY (`cd_fitas`)
-    REFERENCES `db_erp`.`fitas` (`cd_fita`))
+    REFERENCES `db_erp1`.`fitas` (`cd_fita`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `db_erp`.`mdf`
+-- Table `db_erp1`.`mdf`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_erp`.`mdf` (
+CREATE TABLE IF NOT EXISTS `db_erp1`.`mdf` (
   `cd_chapa` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ds_chapa` VARCHAR(45) NOT NULL,
   `qtd_chapa` DOUBLE NOT NULL,
@@ -260,3 +266,4 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO `db_erp1`.`materiais` (`codigoMaterial`, `descricao`, `valor`, `quantidade`, `subTotal`, `codigoItem`) VALUES ('1', 'mdf branco 15mm', '215', '2', '430', '1')
