@@ -8,7 +8,27 @@ public class ItensBeans {
 	private double valor;
 	private double quantidade;
 	private double subTotal;
-	private int codigoOrcamento;
+	
+	
+	
+	
+	
+
+	public ItensBeans(int codigoItem, String descricao, double valor, double quantidade) {
+		super();
+		this.codigoItem = codigoItem;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.quantidade = quantidade;
+	}
+
+	public ItensBeans(String descricao, String observacao, double valor, double quantidade) {
+		super();
+		this.descricao = descricao;
+		this.observacao = observacao;
+		this.valor = valor;
+		this.quantidade = quantidade;
+	}
 
 	public ItensBeans(int codigoItem, String descricao, String observacao, double valor, double quantidade,
 			double subTotal, int codigoOrcamento) {
@@ -19,8 +39,7 @@ public class ItensBeans {
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.subTotal = subTotal;
-		this.codigoOrcamento = codigoOrcamento;
-	}
+			}
 
 	public ItensBeans(int codigoItem, String descricao, String observacao, double valor) {
 		super();
@@ -28,7 +47,7 @@ public class ItensBeans {
 		this.descricao = descricao;
 		this.observacao = observacao;
 		this.valor = valor;
-	}
+	}	
 
 	public int getCodigoItem() {
 		return codigoItem;
@@ -78,12 +97,6 @@ public class ItensBeans {
 		this.subTotal = subTotal;
 	}
 
-	public int getCodigoOrcamento() {
-		return codigoOrcamento;
-	}
-
-	public void setCodigoOrcamento(int codigoOrcamento) {
-		this.codigoOrcamento = codigoOrcamento;
-	}
+	
 
 }

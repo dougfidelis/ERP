@@ -13,7 +13,7 @@ public class ComboDao {
 	/** ______Atributos Conexão_______ **/
 
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/db_erp?useTimezone=true&serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3306/db_erp1?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
 	private String password = "";
 
@@ -45,7 +45,7 @@ public class ComboDao {
 				String descricao = rs.getString(2);
 				double valor = rs.getInt(3);
 				double quantidade = rs.getInt(4);
-				//item.add(new ItensBeans(codigoItem, descricao, valor, quantidade));
+				item.add(new ItensBeans(codigoItem, descricao, valor, quantidade));
 			}
 			con.close();
 			return item;

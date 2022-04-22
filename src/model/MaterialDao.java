@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class OrcamentosDao {
+public class MaterialDao {
 
 	/** ______Atributos Conexão_______ **/
 

@@ -59,6 +59,7 @@ public class EditarCliente extends JFrame {
 	private ClientesDao dao = new ClientesDao();
 	JLabel lblcodDao = new JLabel();
 	public EditarCliente() {
+		setTitle("ERP - Editar Cliente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		addWindowListener(new WindowAdapter() {
 			@Override

@@ -28,6 +28,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AdicionarItem extends JFrame {
 
@@ -62,6 +63,8 @@ public class AdicionarItem extends JFrame {
 	 * Create the frame.
 	 */
 	public AdicionarItem() {
+		setTitle("ERP - Adicionar Item");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {

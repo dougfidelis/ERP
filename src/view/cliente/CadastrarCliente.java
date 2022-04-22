@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.ClientesBeans;
 import model.ClientesDao;
+import java.awt.Toolkit;
 
 public class CadastrarCliente extends JFrame {
 
@@ -51,6 +52,8 @@ public class CadastrarCliente extends JFrame {
 	
 	private Clientes cliente = new Clientes();
 	public CadastrarCliente() {
+		setTitle("ERP - Cadastrar Cliente");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		setAlwaysOnTop(true);
 		addWindowListener(new WindowAdapter() {			
 			@Override

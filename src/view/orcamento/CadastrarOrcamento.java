@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.ComponentOrientation;
 import java.awt.Frame;
+import java.awt.Toolkit;
 
 public class CadastrarOrcamento extends JFrame {
 
@@ -76,6 +77,8 @@ public class CadastrarOrcamento extends JFrame {
 	 */
 
 	public CadastrarOrcamento() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
+		setTitle("ERP - Gerar Or\u00E7amento");
 		setExtendedState(Frame.MAXIMIZED_VERT);
 		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		addWindowListener(new WindowAdapter() {
