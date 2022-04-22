@@ -26,6 +26,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdicionarItem extends JFrame {
 
@@ -63,6 +65,7 @@ public class AdicionarItem extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +81,7 @@ public class AdicionarItem extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 86, 708, 165);
+		scrollPane.setBounds(21, 86, 708, 135);
 		contentPane.add(scrollPane);
 		
 		tabelaItem = new JTable();
@@ -97,7 +100,7 @@ public class AdicionarItem extends JFrame {
 				{null, null, null, null},
 			},
 			new String[] {
-				"C\u00F3digo", "Descri\u00E7\u00E3o", "Observa\u00E7\u00E3o", "Valor"
+				"C\u00F3digo", "Descri\u00E7\u00E3o", "Detalhes", "Valor"
 			}
 		));
 		tabelaItem.getColumnModel().getColumn(0).setPreferredWidth(46);
@@ -180,7 +183,7 @@ public class AdicionarItem extends JFrame {
 		lblItensCadastrados.setBounds(20, 54, 210, 32);
 		contentPane.add(lblItensCadastrados);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Obseva\u00E7\u00E3o");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Detalhes");
 		lblNewLabel_1_1_1.setBounds(77, 330, 60, 14);
 		contentPane.add(lblNewLabel_1_1_1);
 		
@@ -188,5 +191,16 @@ public class AdicionarItem extends JFrame {
 		textField.setColumns(10);
 		textField.setBounds(77, 349, 401, 67);
 		contentPane.add(textField);
+		
+		JButton btnCadastrarNovoItem = new JButton("Cadastrar novo item");
+		btnCadastrarNovoItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarItem frame = new CadastrarItem();
+				frame.setVisible(true);
+			}
+		});
+		btnCadastrarNovoItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCadastrarNovoItem.setBounds(21, 232, 163, 30);
+		contentPane.add(btnCadastrarNovoItem);
 	}
 }

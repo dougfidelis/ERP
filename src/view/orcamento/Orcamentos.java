@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import controller.OrcamentosControl;
 import model.OrcamentosBeans;
 import model.OrcamentosDao;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowFocusListener;
 
 public class Orcamentos extends JFrame {
 
@@ -27,7 +30,7 @@ public class Orcamentos extends JFrame {
 	 * Launch the application.
 	 */
 	OrcamentosDao orcaDao = new OrcamentosDao();
-	OrcamentosControl orcaControl = new OrcamentosControl();
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,10 +49,19 @@ public class Orcamentos extends JFrame {
 	 * Create the frame.
 	 */
 	public Orcamentos() {
+		addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+				OrcamentosControl orcaControl = new OrcamentosControl();
+				tabelaOrcamento.setModel(orcaControl.listarOrcamentos());
+			}
+			public void windowLostFocus(WindowEvent e) {
+			}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				//ArrayList<OrcamentosBeans> orcamento = orcaDao.listarOrcamento();
+				OrcamentosControl orcaControl = new OrcamentosControl();
 				tabelaOrcamento.setModel(orcaControl.listarOrcamentos());
 			}
 		});
@@ -67,6 +79,14 @@ public class Orcamentos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Novo or\u00E7amento");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarOrcamento frame = new CadastrarOrcamento();
+				//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				frame.setVisible(true);
+				// dispose();
+			}
+		});
 		btnNewButton.setBounds(10, 11, 116, 23);
 		contentPane.add(btnNewButton);
 		
@@ -80,9 +100,19 @@ public class Orcamentos extends JFrame {
 				{null, null, null, null, null, "", null, null, null, null, null},
 			},
 			new String[] {
-				"C\u00F3digo", "Validade", "Entrega", "RT", "Imposto", "Valor", "Arquiteto", "Emissao", "Forma de pagamento", "Situa\u00E7\u00E3o", "Codigo Cliente"
+				"C\u00F3digo Or\u00E7amento", "Validade", "Entrega", "RT", "Imposto", "Valor", "Arquiteto", "Emissao", "Forma de pagamento", "Situa\u00E7\u00E3o", "Codigo Cliente"
 			}
 		));
+		tabelaOrcamento.getColumnModel().getColumn(0).setPreferredWidth(105);
+		tabelaOrcamento.getColumnModel().getColumn(1).setPreferredWidth(53);
+		tabelaOrcamento.getColumnModel().getColumn(2).setPreferredWidth(53);
+		tabelaOrcamento.getColumnModel().getColumn(3).setPreferredWidth(30);
+		tabelaOrcamento.getColumnModel().getColumn(4).setPreferredWidth(51);
+		tabelaOrcamento.getColumnModel().getColumn(5).setPreferredWidth(78);
+		tabelaOrcamento.getColumnModel().getColumn(6).setPreferredWidth(81);
+		tabelaOrcamento.getColumnModel().getColumn(8).setPreferredWidth(112);
+		tabelaOrcamento.getColumnModel().getColumn(9).setPreferredWidth(82);
+		tabelaOrcamento.getColumnModel().getColumn(10).setPreferredWidth(83);
 		scrollPane.setViewportView(tabelaOrcamento);
 		
 		/** _________________Botões e suas funções_____________________ **/

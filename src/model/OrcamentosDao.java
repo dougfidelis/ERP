@@ -39,7 +39,7 @@ public class OrcamentosDao {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
-			while (rs.next()) {
+			while (rs.next()) {				
 				int codigoOrcamento = rs.getInt(1);
 				int validade = rs.getInt(2);
 				int entrega = rs.getInt(3);
@@ -63,21 +63,32 @@ public class OrcamentosDao {
 		}
 	}
 
-	/** Método para cadastrar clientes **/
-	/*public void cadastrarCliente(OrcamentosBeans cliente) {
-		String sqlCreate = "insert into cliente (nomeCliente, foneCliente, emailCliente, endCliente) values (?,?,?,?)";
+	/** Método para salvar orcamento **/
+	public void salvarOrcamento(OrcamentosBeans orcamento) {
+		String sqlCreate = "INSERT INTO orcamento (`codigoOrcamento`, `validade`, `entrega`, `rt`,"
+				+ " `imposto`, `valor`, `arquiteto`, `emissao`, `formPgto`, `situacao`, `codigoCliente`)"
+				+ "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(sqlCreate);
-			pst.setString(1, cliente.getNomeCliente());
-			pst.setString(2, cliente.getFoneCliente());
-			pst.setString(3, cliente.getEmailCliente());
-			pst.setString(4, cliente.getEndCliente());
+			pst.setInt(1, orcamento.getCodigoOrcamento());
+			pst.setInt(2, orcamento.getValidade());
+			pst.setInt(3, orcamento.getEntrega());
+			pst.setDouble(4, orcamento.getRt());
+			pst.setDouble(5, orcamento.getImposto());
+			pst.setDouble(6, orcamento.getValor());
+			pst.setString(7, orcamento.getArquiteto());
+			pst.setString(8, orcamento.getEmissao());
+			pst.setString(9, orcamento.getFormPgto());
+			pst.setString(10, orcamento.getSituacao());
+			pst.setInt(11, orcamento.getCodigoCliente());
 			pst.executeUpdate();
 			con.close();
-			//JOptionPane.showOptionDialog(null, "Cliente adicionado com sucesso!", "Cadastro OK", -1, 1, null, null,
-			//		null);
+			JOptionPane.showOptionDialog(null, "Orçamento salvo com sucesso!", "Cadastro OK", -1, 1, null, null,
+					null);
 		} catch (Exception e) {
+			JOptionPane.showOptionDialog(null, "Falha ao salvar \n Erro: "+e, "Falhou", -1, 1, null, null,
+					null);
 			System.out.println(e);
 		}
 

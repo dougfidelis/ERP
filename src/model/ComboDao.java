@@ -45,7 +45,7 @@ public class ComboDao {
 				String descricao = rs.getString(2);
 				double valor = rs.getInt(3);
 				double quantidade = rs.getInt(4);
-				item.add(new ItensBeans(codigoItem, descricao, valor, quantidade));
+				//item.add(new ItensBeans(codigoItem, descricao, valor, quantidade));
 			}
 			con.close();
 			return item;

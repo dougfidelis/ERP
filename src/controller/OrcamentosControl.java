@@ -12,19 +12,11 @@ public class OrcamentosControl {
 	
 	private OrcamentosDao  orcaDao = new OrcamentosDao();
 	public DefaultTableModel listarOrcamentos() {
-		// Método para preencher a tabela de dados cliente
-
 		ArrayList<OrcamentosBeans> orcamento = orcaDao.listarOrcamento();
-		// Cria um objeto para receber os dados da classe Beans
-
 		DefaultTableModel table = (DefaultTableModel) Orcamentos.tabelaOrcamento.getModel();
-		// Cria uma tabela usando o modelo criado na view
-
 		if (table.getRowCount() > 0) {
 			table.setRowCount(0);
-		}// Zera as tabela criada para adicionar os dados do banco		
-
-		
+		}	
 		for (OrcamentosBeans item : orcamento) {
 			Object[] linha = new Object[11];
 			linha[0] = ((OrcamentosBeans) item).getCodigoOrcamento();
@@ -39,13 +31,9 @@ public class OrcamentosControl {
 			linha[9] = ((OrcamentosBeans) item).getSituacao();
 			linha[10] = ((OrcamentosBeans) item).getCodigoCliente();
 			table.addRow(linha);
-			// Preenche a tabela com os dados recebidos da classe Beans
 		}
-
 		return table;
-		// Retorna a tabela com os dados recebidos da classe Beans
 	}	
-	
 	public void salvar(OrcamentosBeans cliente) {
 		//dao.cadastrarCliente(cliente);
 	}

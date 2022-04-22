@@ -15,7 +15,23 @@ public class OrcamentosBeans {
 	private String formPgto;
 	private String situacao;
 	private int codigoCliente;
-		
+	
+	public OrcamentosBeans(int validade, int entrega, double rt, double imposto, double valor, String arquiteto,
+			String emissao, String formPgto, String situacao, int codigoCliente) {
+		super();
+		this.validade = validade;
+		this.entrega = entrega;
+		this.rt = rt;
+		this.imposto = imposto;
+		this.valor = valor;
+		this.arquiteto = arquiteto;
+		this.emissao = emissao;
+		this.formPgto = formPgto;
+		this.situacao = situacao;
+		this.codigoCliente = codigoCliente;
+	}
+	
+	
 	public OrcamentosBeans(int codigoOrcamento, int validade, int entrega, double rt, double imposto, double valor,
 			String arquiteto, String emissao, String formPgto, String situacao, int codigoCliente) {
 		super();

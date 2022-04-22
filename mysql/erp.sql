@@ -35,6 +35,17 @@ create table orcamento(
     update orcamento set entrega = 45 where codigoCliente = 4;
        
     select * from orcamento;
+    
+ create table materiais(
+	codigoCusto integer unsigned auto_increment,
+	descricao varchar(30) not null, 
+    valor double not null,
+	quantidade double not null,
+	subTotal double not null,
+    codigoOrcamento integer unsigned not null,    
+    primary key (codigoCusto),
+    CONSTRAINT fk_custos FOREIGN KEY fk_codigoOrcamento(codigoOrcamento)
+    REFERENCES orcamento(codigoOrcamento) ON DELETE RESTRICT ON UPDATE RESTRICT)ENGINE = innodb;
 
 create table itensOrcamento(
 	codigoItem integer unsigned auto_increment,
@@ -45,10 +56,8 @@ create table itensOrcamento(
     codigoOrcamento integer unsigned not null,    
     primary key (codigoItem),
     CONSTRAINT fk_itens FOREIGN KEY fk_codigoOrcamento(codigoOrcamento)
-    REFERENCES orcamento(codigoOrcamento) ON DELETE RESTRICT ON UPDATE RESTRICT)ENGINE = innodb;
-    
-    drop table itensorcamento;
-    
+    REFERENCES orcamento(codigoOrcamento) ON DELETE RESTRICT ON UPDATE RESTRICT)ENGINE = innodb;   
+   
     create table custosOrcamento(
 	codigoCusto integer unsigned auto_increment,
 	descricao varchar(30) not null, 
@@ -60,16 +69,7 @@ create table itensOrcamento(
     CONSTRAINT fk_custos FOREIGN KEY fk_codigoOrcamento(codigoOrcamento)
     REFERENCES orcamento(codigoOrcamento) ON DELETE RESTRICT ON UPDATE RESTRICT)ENGINE = innodb;
     
-    create table materiais(
-	codigoCusto integer unsigned auto_increment,
-	descricao varchar(30) not null, 
-    valor double not null,
-	quantidade double not null,
-	subTotal double not null,
-    codigoOrcamento integer unsigned not null,    
-    primary key (codigoCusto),
-    CONSTRAINT fk_custos FOREIGN KEY fk_codigoOrcamento(codigoOrcamento)
-    REFERENCES orcamento(codigoOrcamento) ON DELETE RESTRICT ON UPDATE RESTRICT)ENGINE = innodb;
+   
     
     
     

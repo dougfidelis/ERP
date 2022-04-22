@@ -10,10 +10,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class NovoItem extends JFrame {
+public class CadastrarItem extends JFrame {
 	private JTable table;
 	private JTable table_1;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -22,7 +29,7 @@ public class NovoItem extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NovoItem frame = new NovoItem();
+					CadastrarItem frame = new CadastrarItem();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,30 +41,36 @@ public class NovoItem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NovoItem() {
-		setBounds(100, 100, 712, 583);
+	public CadastrarItem() {
+		setBounds(100, 100, 712, 674);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(378, 71, 89, 23);
+		btnEditar.setBounds(371, 250, 89, 23);
 		getContentPane().add(btnEditar);
 		
 		JLabel lblMateriais = new JLabel("Materiais");
 		lblMateriais.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMateriais.setBounds(52, 70, 79, 20);
+		lblMateriais.setBounds(45, 249, 79, 20);
 		getContentPane().add(lblMateriais);
 		
 		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(269, 71, 89, 23);
+		btnRemover.setBounds(262, 250, 89, 23);
 		getContentPane().add(btnRemover);
 		
 		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.setBounds(154, 71, 89, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdicionarMaterial frame = new AdicionarMaterial();
+				frame.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(147, 250, 89, 23);
 		getContentPane().add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(52, 101, 579, 201);
+		scrollPane.setBounds(45, 280, 579, 143);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -82,11 +95,11 @@ public class NovoItem extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(52, 59, 579, 264);
+		separator_1.setBounds(45, 241, 579, 203);
 		getContentPane().add(separator_1);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(52, 360, 579, 113);
+		scrollPane_1.setBounds(45, 481, 579, 143);
 		getContentPane().add(scrollPane_1);
 		
 		table_1 = new JTable();
@@ -111,25 +124,68 @@ public class NovoItem extends JFrame {
 		scrollPane_1.setViewportView(table_1);
 		
 		JButton btnEditar_1 = new JButton("Editar");
-		btnEditar_1.setBounds(378, 329, 89, 23);
+		btnEditar_1.setBounds(371, 450, 89, 23);
 		getContentPane().add(btnEditar_1);
 		
 		JButton btnNewButton_1 = new JButton("Adicionar");
-		btnNewButton_1.setBounds(154, 329, 89, 23);
+		btnNewButton_1.setBounds(147, 450, 89, 23);
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnRemover_1 = new JButton("Remover");
-		btnRemover_1.setBounds(269, 329, 89, 23);
+		btnRemover_1.setBounds(262, 450, 89, 23);
 		getContentPane().add(btnRemover_1);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(52, 313, 579, 163);
+		separator_2.setBounds(45, 434, 579, 163);
 		getContentPane().add(separator_2);
 		
 		JLabel lblCustos = new JLabel("Custos");
 		lblCustos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCustos.setBounds(52, 329, 114, 20);
+		lblCustos.setBounds(45, 450, 114, 20);
 		getContentPane().add(lblCustos);
+		
+		JLabel lblNewLabel_1 = new JLabel("C\u00F3digo");
+		lblNewLabel_1.setBounds(45, 92, 46, 14);
+		getContentPane().add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(45, 113, 46, 20);
+		getContentPane().add(textField);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Descri\u00E7\u00E3o");
+		lblNewLabel_1_1.setBounds(101, 92, 46, 14);
+		getContentPane().add(lblNewLabel_1_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(101, 113, 401, 20);
+		getContentPane().add(textField_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Valor UN");
+		lblNewLabel_1_2.setBounds(512, 92, 46, 14);
+		getContentPane().add(lblNewLabel_1_2);
+		
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBounds(512, 113, 86, 20);
+		getContentPane().add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(101, 163, 401, 67);
+		getContentPane().add(textField_3);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Datalhes");
+		lblNewLabel_1_1_1.setBounds(101, 144, 46, 14);
+		getContentPane().add(lblNewLabel_1_1_1);
+		
+		JLabel lblCadastrarItem = new JLabel("Cadastrar item");
+		lblCadastrarItem.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblCadastrarItem.setBounds(26, 23, 210, 32);
+		getContentPane().add(lblCadastrarItem);
 
 	}
 }
