@@ -1,22 +1,20 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import view.cliente.Clientes;
 import view.estoque.Estoque;
 import view.orcamento.Orcamentos;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 
 public class Principal extends JFrame {
 
@@ -64,6 +62,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Estoque frame = new Estoque();
 				frame.setVisible(true);
+				dispose();
 			}
 		});
 		JButton btnClientes = new JButton("Clientes");

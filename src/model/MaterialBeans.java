@@ -4,13 +4,38 @@ public class MaterialBeans {
 	
 	private int codigoMaterial;
 	private String descricaoMaterial;	
-	private double valorMaterial;
 	private double quantidadeMaterial;
+	private double valorMaterial;
 	private double subTotalMateiral;
 	
+		
 	
 	
-	
+	public MaterialBeans(String descricaoMaterial, double quantidadeMaterial, double valorMaterial) {
+		super();
+		this.descricaoMaterial = descricaoMaterial;
+		this.quantidadeMaterial = quantidadeMaterial;
+		this.valorMaterial = valorMaterial;
+	}
+
+	public MaterialBeans(int codigoMaterial, String descricaoMaterial, double valorMaterial,
+			double quantidadeMaterial) {
+		super();
+		this.codigoMaterial = codigoMaterial;
+		this.descricaoMaterial = descricaoMaterial;
+		this.valorMaterial = valorMaterial;
+		this.quantidadeMaterial = quantidadeMaterial;
+	}
+
+	public MaterialBeans(int codigoMaterial, String descricaoMaterial, double valorMaterial, double quantidadeMaterial,
+			double subTotalMateiral) {
+		super();
+		this.codigoMaterial = codigoMaterial;
+		this.descricaoMaterial = descricaoMaterial;
+		this.valorMaterial = valorMaterial;
+		this.quantidadeMaterial = quantidadeMaterial;
+		this.subTotalMateiral = subTotalMateiral;
+	}
 	
 	public int getCodigoMaterial() {
 		return codigoMaterial;

@@ -13,7 +13,7 @@ public class MaterialDao {
 	/** ______Atributos Conexão_______ **/
 
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/db_erp1?useTimezone=true&serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3306/db_osbe?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
 	private String password = "";
 
@@ -31,31 +31,23 @@ public class MaterialDao {
 		return con;
 	}
 
-	/** Método para listar orçamentos **/
-	public ArrayList<OrcamentosBeans> listarOrcamento() {
-		ArrayList<OrcamentosBeans> orcamento = new ArrayList<>();
-		String sql = "select * from orcamento order by codigoOrcamento";
+	/** Método para listar chapas **/
+	public ArrayList<MaterialBeans> listarChapas(String categoria) {
+		ArrayList<MaterialBeans> material = new ArrayList<>();
+		String sql = "select * from "+categoria+" order by descricao";
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {				
-				int codigoOrcamento = rs.getInt(1);
-				int validade = rs.getInt(2);
-				int entrega = rs.getInt(3);
-				double rt = rs.getInt(4);
-				double imposto = rs.getInt(5);
-				double valor = rs.getInt(6);
-				String arquiteto = rs.getString(7);
-				String emissao = rs.getString(8);
-				String formPgto = rs.getString(9);
-				String situacao = rs.getString(10);
-				int codigoCliente = rs.getInt(11);
-				orcamento.add(new OrcamentosBeans(codigoOrcamento, validade, entrega, rt, imposto, valor,
-						arquiteto, emissao, formPgto, situacao, codigoCliente));
+				int codigoItem = rs.getInt(1);
+				String descricao = rs.getString(2);
+				double valor = rs.getInt(3);
+				double quantidade = rs.getInt(4);
+				material.add(new MaterialBeans(codigoItem, descricao, valor, quantidade));
 			}
 			con.close();
-			return orcamento;
+			return material;
 		} catch (Exception e) {
 			
 			System.out.println(e);
@@ -63,26 +55,16 @@ public class MaterialDao {
 		}
 	}
 
-	/** Método para salvar orcamento **/
-	public void salvarOrcamento(OrcamentosBeans orcamento) {
-		String sqlCreate = "INSERT INTO orcamento (`codigoOrcamento`, `validade`, `entrega`, `rt`,"
-				+ " `imposto`, `valor`, `arquiteto`, `emissao`, `formPgto`, `situacao`, `codigoCliente`)"
-				+ "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	/** Método para cadastrar material **/
+	public void cadastrarMaterial(String tabela, MaterialBeans material) {
+		String insert = "INSERT INTO "+tabela+"( `descricao`, `valor`, `quantidade`) VALUES (?, ?, ?)";
 		try {
 			Connection con = conectar();
-			PreparedStatement pst = con.prepareStatement(sqlCreate);
-			pst.setInt(1, orcamento.getCodigoOrcamento());
-			pst.setInt(2, orcamento.getValidade());
-			pst.setInt(3, orcamento.getEntrega());
-			pst.setDouble(4, orcamento.getRt());
-			pst.setDouble(5, orcamento.getImposto());
-			pst.setDouble(6, orcamento.getValor());
-			pst.setString(7, orcamento.getArquiteto());
-			pst.setString(8, orcamento.getEmissao());
-			pst.setString(9, orcamento.getFormPgto());
-			pst.setString(10, orcamento.getSituacao());
-			pst.setInt(11, orcamento.getCodigoCliente());
-			pst.executeUpdate();
+			PreparedStatement pst = con.prepareStatement(insert);
+			pst.setString(1, material.getDescricaoMaterial());
+			pst.setDouble(2, material.getQuantidadeMaterial());			
+			pst.setDouble(3, material.getValorMaterial());
+			pst.execute();
 			con.close();
 			JOptionPane.showOptionDialog(null, "Orçamento salvo com sucesso!", "Cadastro OK", -1, 1, null, null,
 					null);
@@ -110,8 +92,8 @@ public class MaterialDao {
 
 	}
 
-	public ArrayList<OrcamentosBeans> selecionarCliente(int codigo) {
-		ArrayList<OrcamentosBeans> cliente = new ArrayList<OrcamentosBeans>();
+	public ArrayList<MaterialBeans> selecionarCliente(int codigo) {
+		ArrayList<MaterialBeans> cliente = new ArrayList<MaterialBeans>();
 		String sql = "select * from cliente WHERE codigoCliente = ?";
 		try {
 			Connection con = conectar();
@@ -134,6 +116,7 @@ public class MaterialDao {
 			return null;
 		}
 	}
+
 
 	/*public void updateCliente(OrcamentosBeans cliente) {
 		String sqlCreate = "update cliente set nomeCliente = ?, foneCliente = ?, emailCliente = ?,  endCliente = ? WHERE codigoCliente = ?";

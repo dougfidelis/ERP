@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ public class ClientesDao {
 	/** ______Atributos Conexão_______ **/
 
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/db_erp1?useTimezone=true&serverTimezone=UTC";
+	private String url = "jdbc:mysql://localhost:3306/db_osbe?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
 	private String password = "";
 
@@ -50,7 +51,7 @@ public class ClientesDao {
 			con.close();
 			return clientes;
 		} catch (Exception e) {
-			
+
 			System.out.println(e);
 			return null;
 		}
@@ -68,12 +69,12 @@ public class ClientesDao {
 			pst.setString(4, cliente.getEndCliente());
 			pst.executeUpdate();
 			con.close();
-			//JOptionPane.showOptionDialog(null, "Cliente adicionado com sucesso!", "Cadastro OK", -1, 1, null, null,
-			//		null);
+			// JOptionPane.showOptionDialog(null, "Cliente adicionado com sucesso!",
+			// "Cadastro OK", -1, 1, null, null,
+			// null);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
 	}
 
 	/** Método para excluir clientes **/
@@ -85,9 +86,18 @@ public class ClientesDao {
 			pstmt.setInt(1, codigoCliente);
 			pstmt.execute();
 			con.close();
-			//JOptionPane.showOptionDialog(null, "Cliente removido com sucesso!", "Remover Cliente", -1, 1, null, null,	null);
-		} catch (Exception e) {
-			System.out.println(e);
+			JOptionPane.showOptionDialog(null, "Cliente removido com sucesso!", "Remover Cliente", 
+					-1, 1, null, null, null);
+		} catch (SQLException e) {
+			if (e.getErrorCode() == 1451) {
+				JOptionPane.showOptionDialog(null,
+						"ERRO: " + e.getErrorCode()
+								+ "\n Não é possível remover cientes que possuem orçamentos catasdatros",
+						"Remover Cliente", -1, 1, null, null, null);
+			} else {
+				JOptionPane.showOptionDialog(null, "ERRO: " + e.getErrorCode() + "\n Erro desconhecido",
+						"Remover Cliente", -1, 1, null, null, null);
+			}
 		}
 
 	}

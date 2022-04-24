@@ -2,17 +2,22 @@ package view.orcamento;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,14 +26,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ItensControl;
-import model.ComboDao;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import model.ClientesBeans;
+import model.MaterialBeans;
+import view.cliente.CadastrarCliente;
+import view.cliente.Clientes;
 
 public class AdicionarMaterial extends JFrame {
 
@@ -68,17 +69,12 @@ public class AdicionarMaterial extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		setTitle("ERP - Adicionar Material");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 768, 479);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("Adicionar Material");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel.setBounds(10, 11, 210, 32);
-		contentPane.add(lblNewLabel);
 
 		JComboBox comboBox = new JComboBox();
 
@@ -110,8 +106,13 @@ public class AdicionarMaterial extends JFrame {
 			}
 		});
 
-		tabelaItem.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "C\u00F3digo", "Descri\u00E7\u00E3o", "Valor" }));
+		tabelaItem.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"C\u00F3digo", "Descri\u00E7\u00E3o", "Valor"
+			}
+		));
 		tabelaItem.getColumnModel().getColumn(1).setPreferredWidth(632);
 		tabelaItem.getColumnModel().getColumn(2).setPreferredWidth(94);
 		scrollPane.setViewportView(tabelaItem);
@@ -180,20 +181,32 @@ public class AdicionarMaterial extends JFrame {
 		lblNewLabel_1_2_2.setBounds(633, 329, 46, 14);
 		contentPane.add(lblNewLabel_1_2_2);
 
+		
+		
+		
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 int codigoMaterial = Integer.parseInt(txt_cd_sel.getText());
-				 String descricaoMaterial = txt_desc_sel.getText();
-				 double valorMaterial = Double.parseDouble(txt_valor_sel.getText());
-				 double quantidadeMaterial = Double.parseDouble(txt_qtd.getText());
-				 double subTotalMateiral = Double.parseDouble(txt_sub_tot.getText());
-				 int codigoItem;
-				 
-				
-				
+				int item = CadastrarItem.tabMat.getRowCount()+1;				
+				int codigoMaterial = Integer.parseInt(txt_cd_sel.getText());
+				String descricaoMaterial = txt_desc_sel.getText();
+				double valorMaterial = Double.parseDouble(txt_valor_sel.getText());
+				double quantidadeMaterial = Double.parseDouble(txt_qtd.getText());
+				double subTotalMateiral = Double.parseDouble(txt_sub_tot.getText());
+				Object[] material = new Object[6];
+				material[0] = item;
+				material[1] = codigoMaterial;
+				material[2] = descricaoMaterial;
+				material[3] = valorMaterial;
+				material[4] = quantidadeMaterial;
+				material[5] = subTotalMateiral;
+				DefaultTableModel table = (DefaultTableModel) CadastrarItem.tabMat.getModel();
+				table.addRow(material);
+				dispose();
+
 			}
 		});
+		
 		btnAdicionar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAdicionar.setBounds(584, 381, 145, 37);
 		contentPane.add(btnAdicionar);

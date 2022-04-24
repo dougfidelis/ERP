@@ -70,14 +70,18 @@ public class Clientes extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				try {
-					tabelaClientes.setModel(control.listarClientes());					
+					tabelaClientes.setModel(control.listarClientes());
 				} catch (Exception e2) {
-					JOptionPane.showOptionDialog(null, "A conexão com o bando de dados falhou \n"+e2.getMessage(), "Falha na conexão ", -1, 2,
-							 null,null, null);
-					Principal frame = new Principal();
-					frame.setVisible(true);
+					JOptionPane.showOptionDialog(null, "A conexão com o bando de dados falhou \n" + e2.getMessage(),
+							"Falha na conexão ", -1, 2, null, null, null);
 					dispose();
 				}
+			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Principal frame = new Principal();
+				frame.setVisible(true);
+				dispose();
 			}
 		});
 		/** _________________Configurações do frame_____________________ **/
@@ -163,22 +167,22 @@ public class Clientes extends JFrame {
 		});
 		btnEditarCliente.setBounds(432, 271, 141, 23);
 		contentPane.add(btnEditarCliente);
-		JButton btnAtualiza = new JButton("Novo orcamento");
-		btnAtualiza.addActionListener(new ActionListener() {
+		JButton btnNovoOrcamento = new JButton("Novo orcamento");
+		btnNovoOrcamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (codigoSelecionado <= 0) {
 					JOptionPane.showOptionDialog(null, "Selecione um cliente!", "Atenção!", -1, 2, null, null, null);
 				} else {
 					CadastrarOrcamento frame = new CadastrarOrcamento();
-					//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					// frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 					// dispose();
 				}
 			}
 
 		});
-		btnAtualiza.setBounds(20, 271, 141, 23);
-		contentPane.add(btnAtualiza);
+		btnNovoOrcamento.setBounds(20, 271, 141, 23);
+		contentPane.add(btnNovoOrcamento);
 
 		txtCod = new JTextField();
 		txtCod.setVisible(false);
@@ -189,8 +193,6 @@ public class Clientes extends JFrame {
 		JButton btnVoltarAoInicio = new JButton("Voltar ao inicio");
 		btnVoltarAoInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Principal frame = new Principal();
-				frame.setVisible(true);
 				dispose();
 			}
 		});

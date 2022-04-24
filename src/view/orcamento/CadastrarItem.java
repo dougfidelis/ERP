@@ -1,27 +1,37 @@
 package view.orcamento;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.BoxLayout;
 
 public class CadastrarItem extends JFrame {
-	private JTable table;
+	static JTable tabMat;
 	private JTable table_1;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtCodigoItem;
+	private JTextField txtDescricao;
+	private JTextField txtValor;
 
 	/**
 	 * Launch the application.
@@ -42,153 +52,28 @@ public class CadastrarItem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public CadastrarItem() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
-		setTitle("ERP - Cadastrar Item");
-		setBounds(100, 100, 712, 674);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
-		
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(309, 250, 89, 23);
-		getContentPane().add(btnEditar);
-		
-		JLabel lblMateriais = new JLabel("Materiais");
-		lblMateriais.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMateriais.setBounds(45, 249, 79, 20);
-		getContentPane().add(lblMateriais);
-		
-		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(210, 250, 89, 23);
-		getContentPane().add(btnRemover);
-		
-		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AdicionarMaterial frame = new AdicionarMaterial();
-				frame.setVisible(true);
+		addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+				
+			}
+			public void windowLostFocus(WindowEvent e) {
 			}
 		});
-		btnNewButton.setBounds(111, 250, 89, 23);
-		getContentPane().add(btnNewButton);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(45, 280, 579, 143);
-		getContentPane().add(scrollPane);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
+		setTitle("ERP - Cadastrar Item");
+		setBounds(100, 100, 650, 705);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-		new Object[][] {
-			{null, null, null, null, null},
-		},
-		new String[] {
-			"C\u00F3digo", "Descri\u00E7\u00E3o", "Valor Unidade", "QTD", "Sub Total"
-		}
-	));
-	table.getColumnModel().getColumn(0).setPreferredWidth(45);
-	table.getColumnModel().getColumn(0).setMinWidth(45);
-	table.getColumnModel().getColumn(1).setPreferredWidth(441);
-	table.getColumnModel().getColumn(1).setMinWidth(330);
-	table.getColumnModel().getColumn(2).setPreferredWidth(97);
-	table.getColumnModel().getColumn(2).setMinWidth(70);
-	table.getColumnModel().getColumn(3).setPreferredWidth(45);
-	table.getColumnModel().getColumn(3).setMinWidth(45);
-	table.getColumnModel().getColumn(4).setPreferredWidth(104);
-	table.getColumnModel().getColumn(4).setMinWidth(70);
-		scrollPane.setViewportView(table);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		getContentPane().add(scrollPane_2);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(45, 241, 579, 203);
-		getContentPane().add(separator_1);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(45, 481, 579, 143);
-		getContentPane().add(scrollPane_1);
-		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null, null, null, null},
-				},
-				new String[] {
-					"C\u00F3digo", "Descri\u00E7\u00E3o", "Valor Unidade", "QTD", "Sub Total"
-				}
-			));
-			table.getColumnModel().getColumn(0).setPreferredWidth(45);
-			table.getColumnModel().getColumn(0).setMinWidth(45);
-			table.getColumnModel().getColumn(1).setPreferredWidth(441);
-			table.getColumnModel().getColumn(1).setMinWidth(330);
-			table.getColumnModel().getColumn(2).setPreferredWidth(97);
-			table.getColumnModel().getColumn(2).setMinWidth(70);
-			table.getColumnModel().getColumn(3).setPreferredWidth(45);
-			table.getColumnModel().getColumn(3).setMinWidth(45);
-			table.getColumnModel().getColumn(4).setPreferredWidth(104);
-			table.getColumnModel().getColumn(4).setMinWidth(70);
-		scrollPane_1.setViewportView(table_1);
-		
-		JButton btnEditar_1 = new JButton("Editar");
-		btnEditar_1.setBounds(299, 447, 89, 23);
-		getContentPane().add(btnEditar_1);
-		
-		JButton btnNewButton_1 = new JButton("Adicionar");
-		btnNewButton_1.setBounds(101, 447, 89, 23);
-		getContentPane().add(btnNewButton_1);
-		
-		JButton btnRemover_1 = new JButton("Remover");
-		btnRemover_1.setBounds(200, 447, 89, 23);
-		getContentPane().add(btnRemover_1);
-		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(45, 434, 579, 163);
-		getContentPane().add(separator_2);
-		
-		JLabel lblCustos = new JLabel("Custos");
-		lblCustos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCustos.setBounds(45, 450, 114, 20);
-		getContentPane().add(lblCustos);
-		
-		JLabel lblNewLabel_1 = new JLabel("C\u00F3digo");
-		lblNewLabel_1.setBounds(45, 92, 46, 14);
-		getContentPane().add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(45, 113, 46, 20);
-		getContentPane().add(textField);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Descri\u00E7\u00E3o");
-		lblNewLabel_1_1.setBounds(101, 92, 58, 14);
-		getContentPane().add(lblNewLabel_1_1);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(101, 113, 427, 20);
-		getContentPane().add(textField_1);
-		
-		JLabel lblNewLabel_1_2 = new JLabel("Valor UN");
-		lblNewLabel_1_2.setBounds(538, 92, 86, 14);
-		getContentPane().add(lblNewLabel_1_2);
-		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(538, 113, 86, 20);
-		getContentPane().add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(45, 163, 579, 67);
-		getContentPane().add(textField_3);
-		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Datalhes");
-		lblNewLabel_1_1_1.setBounds(45, 138, 58, 14);
-		getContentPane().add(lblNewLabel_1_1_1);
-		
-		JLabel lblCadastrarItem = new JLabel("Cadastrar item");
-		lblCadastrarItem.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblCadastrarItem.setBounds(26, 23, 210, 32);
-		getContentPane().add(lblCadastrarItem);
+		JPanel panel = new JPanel();
+		scrollPane_2.setViewportView(panel);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
@@ -196,8 +81,171 @@ public class CadastrarItem extends JFrame {
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSalvar.setBounds(484, 34, 140, 32);
-		getContentPane().add(btnSalvar);
+		
+		JPanel painel_atributos = new JPanel();
+		painel_atributos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Atributos do Item", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(100, 100, 100)));
+		painel_atributos.setLayout(null);
+		
+		JScrollPane scrollPane_Detalhes = new JScrollPane();
+		scrollPane_Detalhes.setBounds(22, 90, 568, 66);
+		painel_atributos.add(scrollPane_Detalhes);
+		
+		JTextArea textArea = new JTextArea();
+		scrollPane_Detalhes.setViewportView(textArea);
+		textArea.setBorder(null);
+		
+		txtCodigoItem = new JTextField();
+		txtCodigoItem.setBounds(22, 45, 46, 20);
+		painel_atributos.add(txtCodigoItem);
+		txtCodigoItem.setEditable(false);
+		txtCodigoItem.setColumns(10);
+		
+		txtDescricao = new JTextField();
+		txtDescricao.setBounds(78, 45, 417, 20);
+		painel_atributos.add(txtDescricao);
+		txtDescricao.setColumns(10);
+		
+		txtValor = new JTextField();
+		txtValor.setBounds(505, 45, 85, 20);
+		painel_atributos.add(txtValor);
+		txtValor.setEditable(false);
+		txtValor.setColumns(10);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Descri\u00E7\u00E3o");
+		lblNewLabel_1_1.setBounds(78, 24, 58, 14);
+		painel_atributos.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("C\u00F3digo");
+		lblNewLabel_1.setBounds(22, 24, 46, 14);
+		painel_atributos.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Valor");
+		lblNewLabel_1_2.setBounds(505, 24, 86, 14);
+		painel_atributos.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Detalhes");
+		lblNewLabel_1_1_1.setBounds(22, 76, 58, 14);
+		painel_atributos.add(lblNewLabel_1_1_1);
+		
+		JPanel painel_materiais = new JPanel();
+		painel_materiais.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Materiais do Item", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(100, 100, 100)));
+		painel_materiais.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Adicionar");
+		btnNewButton.setBounds(161, 151, 89, 23);
+		painel_materiais.add(btnNewButton);
+		
+		JButton btnRemover = new JButton("Remover");
+		btnRemover.setBounds(260, 151, 89, 23);
+		painel_materiais.add(btnRemover);
+		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds(357, 151, 89, 23);
+		painel_materiais.add(btnEditar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(15, 20, 580, 120);
+		painel_materiais.add(scrollPane);
+		
+		tabMat = new JTable();
+		tabMat.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Item", "C\u00F3digo", "Descri\u00E7\u00E3o", "Valor Unidade", "QTD", "Sub Total"
+			}
+		));
+		tabMat.getColumnModel().getColumn(0).setPreferredWidth(45);
+		tabMat.getColumnModel().getColumn(0).setMinWidth(45);
+		tabMat.getColumnModel().getColumn(1).setPreferredWidth(45);
+		tabMat.getColumnModel().getColumn(1).setMinWidth(45);
+		tabMat.getColumnModel().getColumn(2).setPreferredWidth(441);
+		tabMat.getColumnModel().getColumn(2).setMinWidth(100);
+		tabMat.getColumnModel().getColumn(3).setPreferredWidth(97);
+		tabMat.getColumnModel().getColumn(3).setMinWidth(70);
+		tabMat.getColumnModel().getColumn(4).setPreferredWidth(45);
+		tabMat.getColumnModel().getColumn(4).setMinWidth(45);
+		tabMat.getColumnModel().getColumn(5).setPreferredWidth(110);
+		tabMat.getColumnModel().getColumn(5).setMinWidth(110);
+		scrollPane.setViewportView(tabMat);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdicionarMaterial frame = new AdicionarMaterial();
+				frame.setVisible(true);
+			}
+		});
+		
+		JPanel painel_custos = new JPanel();
+		painel_custos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Custos do Item", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(100, 100, 100)));
+		painel_custos.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(15, 20, 580, 120);
+		painel_custos.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"C\u00F3digo", "Descri\u00E7\u00E3o", "Valor Unidade", "QTD", "Sub Total"
+			}
+		));
+		scrollPane_1.setViewportView(table_1);
+		
+		JButton btnRemover_2 = new JButton("Remover");
+		btnRemover_2.setBounds(260, 151, 89, 23);
+		painel_custos.add(btnRemover_2);
+		
+		JButton btnNewButton_2 = new JButton("Adicionar");
+		btnNewButton_2.setBounds(161, 151, 89, 23);
+		painel_custos.add(btnNewButton_2);
+		
+		JButton btnEditar_2 = new JButton("Editar");
+		btnEditar_2.setBounds(359, 151, 89, 23);
+		painel_custos.add(btnEditar_2);
+		
+		JLabel lblNewLabel = new JLabel("OSBE M\u00F3veis sob medida \u00A92022 ");
+		lblNewLabel.setForeground(SystemColor.windowBorder);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(painel_atributos, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(painel_materiais, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(painel_custos, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(246)
+							.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(13, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(11)
+					.addComponent(painel_atributos, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(painel_materiais, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(painel_custos, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel)
+					.addGap(14))
+		);
+		panel.setLayout(gl_panel);
 
 	}
 }

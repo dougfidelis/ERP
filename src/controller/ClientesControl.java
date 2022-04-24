@@ -13,8 +13,9 @@ import view.cliente.Clientes;
 import view.cliente.EditarCliente;
 
 public class ClientesControl {
-	
+
 	private ClientesDao dao = new ClientesDao();
+
 	public DefaultTableModel listarClientes() {
 		// Método para preencher a tabela de dados cliente
 
@@ -26,7 +27,7 @@ public class ClientesControl {
 
 		if (table.getRowCount() > 0) {
 			table.setRowCount(0);
-		}// Zera as tabela criada para adicionar os dados do banco		
+		} // Zera as tabela criada para adicionar os dados do banco
 
 		for (ClientesBeans item : orcamento) {
 			Object[] linha = new Object[5];
@@ -41,16 +42,16 @@ public class ClientesControl {
 
 		return table;
 		// Retorna a tabela com os dados recebidos da classe Beans
-	}	
-	
+	}
+
 	public void salvar(ClientesBeans cliente) {
 		dao.cadastrarCliente(cliente);
 	}
-	
+
 	public void removerCliente(int codigoCliente) {
 		dao.removerCliente(codigoCliente);
-	}	
-	
+	}
+
 	public ArrayList<ClientesBeans> selecionarCliente() {
 		ArrayList<ClientesBeans> cliente = dao.listarClientes();
 		for (ClientesBeans item : cliente) {
@@ -63,7 +64,5 @@ public class ClientesControl {
 		}
 		return cliente;
 	}
-	
-	
 
 }

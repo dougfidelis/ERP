@@ -87,14 +87,15 @@ public class CadastrarOrcamento extends JFrame {
 				try {
 				ArrayList<ClientesBeans> cliente = Clientes.dao.selecionarCliente(Clientes.codigoSelecionado);
 				ArrayList<OrcamentosBeans> orcamento = orcaDao.listarOrcamento();
-					txtCodCliente.setText(String.valueOf(Clientes.codigoSelecionado));					
+					txtCodCliente.setText(String.valueOf(cliente.get(0).getCodigoCliente()));					
 					lblNumOrc.setText(String.valueOf(orcamento.get(orcamento.size() - 1).getCodigoOrcamento() + 1));
 					txtNomeCliente.setText(cliente.get(0).getNomeCliente());
 					txtFoneCliente.setText(cliente.get(0).getFoneCliente());
 					txtEmailCliente.setText(cliente.get(0).getEmailCliente());
 					txtEndCliente.setText(cliente.get(0).getEndCliente());
 				} catch (Exception e2) {
-					txtCodCliente.setText("1");
+					System.out.println(e2);
+					txtCodCliente.setText("ERRO");
 				}
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				Date data = new Date();
@@ -347,7 +348,7 @@ public class CadastrarOrcamento extends JFrame {
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnSalvar.setBounds(407, 231, 89, 35);
+		btnSalvar.setBounds(407, 231, 98, 35);
 		contentPane.add(btnSalvar);
 	}
 }

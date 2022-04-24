@@ -158,12 +158,6 @@ public class EditarCliente extends JFrame {
 		});
 		btnSalvar.setBounds(360, 103, 128, 38);
 		contentPane.add(btnSalvar);
-		JComboBox comboBox = new JComboBox();
-		comboBox.setVisible(true);
-
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Cliente" }));
-		comboBox.setBounds(61, 54, 269, 22);
-		contentPane.add(comboBox);
 		
 		
 		lblcodDao.setFont(new Font("Tahoma", Font.PLAIN, 26));
