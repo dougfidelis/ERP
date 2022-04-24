@@ -94,8 +94,8 @@ public class CadastrarOrcamento extends JFrame {
 					txtEmailCliente.setText(cliente.get(0).getEmailCliente());
 					txtEndCliente.setText(cliente.get(0).getEndCliente());
 				} catch (Exception e2) {
-					System.out.println(e2);
-					txtCodCliente.setText("ERRO");
+					//System.out.println(e2);
+					txtCodCliente.setText("1");
 				}
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				Date data = new Date();
@@ -130,6 +130,7 @@ public class CadastrarOrcamento extends JFrame {
 		lblFone.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		txtFoneCliente = new JTextField();
+		txtFoneCliente.setText("0000-0000");
 		txtFoneCliente.setBounds(395, 89, 194, 20);
 		txtFoneCliente.setColumns(10);
 
@@ -139,7 +140,6 @@ public class CadastrarOrcamento extends JFrame {
 
 		txtEndCliente = new JTextField();
 		txtEndCliente.setBounds(53, 89, 269, 20);
-		txtEndCliente.setText("End Cliente");
 		txtEndCliente.setColumns(10);
 
 		txtNomeCliente = new JTextField();

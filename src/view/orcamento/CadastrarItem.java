@@ -28,7 +28,6 @@ import javax.swing.BoxLayout;
 
 public class CadastrarItem extends JFrame {
 	static JTable tabMat;
-	private JTable table_1;
 	private JTextField txtCodigoItem;
 	private JTextField txtDescricao;
 	private JTextField txtValor;
@@ -65,12 +64,10 @@ public class CadastrarItem extends JFrame {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		setTitle("ERP - Cadastrar Item");
-		setBounds(100, 100, 650, 705);
+		setBounds(100, 100, 650, 643);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		getContentPane().add(scrollPane_2);
 		
 		JPanel panel = new JPanel();
 		scrollPane_2.setViewportView(panel);
@@ -127,24 +124,17 @@ public class CadastrarItem extends JFrame {
 		lblNewLabel_1_1_1.setBounds(22, 76, 58, 14);
 		painel_atributos.add(lblNewLabel_1_1_1);
 		
+		JLabel lblNewLabel = new JLabel("OSBE M\u00F3veis sob medida \u00A92022 ");
+		lblNewLabel.setForeground(SystemColor.windowBorder);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+		
 		JPanel painel_materiais = new JPanel();
 		painel_materiais.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Materiais do Item", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(100, 100, 100)));
 		painel_materiais.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.setBounds(161, 151, 89, 23);
-		painel_materiais.add(btnNewButton);
-		
-		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(260, 151, 89, 23);
-		painel_materiais.add(btnRemover);
-		
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(357, 151, 89, 23);
-		painel_materiais.add(btnEditar);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 20, 580, 120);
+		scrollPane.setBounds(15, 20, 580, 250);
 		painel_materiais.add(scrollPane);
 		
 		tabMat = new JTable();
@@ -168,6 +158,8 @@ public class CadastrarItem extends JFrame {
 		tabMat.getColumnModel().getColumn(5).setPreferredWidth(110);
 		tabMat.getColumnModel().getColumn(5).setMinWidth(110);
 		scrollPane.setViewportView(tabMat);
+		
+		JButton btnNewButton = new JButton("Adicionar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdicionarMaterial frame = new AdicionarMaterial();
@@ -175,60 +167,31 @@ public class CadastrarItem extends JFrame {
 			}
 		});
 		
-		JPanel painel_custos = new JPanel();
-		painel_custos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Custos do Item", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(100, 100, 100)));
-		painel_custos.setLayout(null);
+		JButton btnRemover = new JButton("Remover");
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(15, 20, 580, 120);
-		painel_custos.add(scrollPane_1);
-		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"C\u00F3digo", "Descri\u00E7\u00E3o", "Valor Unidade", "QTD", "Sub Total"
-			}
-		));
-		scrollPane_1.setViewportView(table_1);
-		
-		JButton btnRemover_2 = new JButton("Remover");
-		btnRemover_2.setBounds(260, 151, 89, 23);
-		painel_custos.add(btnRemover_2);
-		
-		JButton btnNewButton_2 = new JButton("Adicionar");
-		btnNewButton_2.setBounds(161, 151, 89, 23);
-		painel_custos.add(btnNewButton_2);
-		
-		JButton btnEditar_2 = new JButton("Editar");
-		btnEditar_2.setBounds(359, 151, 89, 23);
-		painel_custos.add(btnEditar_2);
-		
-		JLabel lblNewLabel = new JLabel("OSBE M\u00F3veis sob medida \u00A92022 ");
-		lblNewLabel.setForeground(SystemColor.windowBorder);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		JButton btnEditar = new JButton("Editar");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(9)
-							.addComponent(painel_atributos, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(9)
-							.addComponent(painel_materiais, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(9)
-							.addComponent(painel_custos, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(246)
-							.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addGap(9)
+					.addComponent(painel_atributos, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(170)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(btnRemover, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(9)
+					.addComponent(painel_materiais, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(246)
+					.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(10)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -236,16 +199,19 @@ public class CadastrarItem extends JFrame {
 					.addGap(11)
 					.addComponent(painel_atributos, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE)
 					.addGap(6)
-					.addComponent(painel_materiais, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnNewButton)
+						.addComponent(btnRemover)
+						.addComponent(btnEditar))
 					.addGap(6)
-					.addComponent(painel_custos, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(painel_materiais, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
 					.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel)
-					.addGap(14))
+					.addGap(6)
+					.addComponent(lblNewLabel))
 		);
 		panel.setLayout(gl_panel);
+		getContentPane().add(scrollPane_2);
 
 	}
 }

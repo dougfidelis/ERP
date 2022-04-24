@@ -70,7 +70,7 @@ public class Orcamentos extends JFrame {
 				"C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
 		setTitle("ERP - Orçamentos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 847, 529);
+		setBounds(100, 100, 783, 529);
 		
 		/** __________________Elementos do frame_______________________ **/
 		contentPane = new JPanel();
@@ -91,7 +91,7 @@ public class Orcamentos extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 58, 787, 385);
+		scrollPane.setBounds(21, 58, 732, 385);
 		contentPane.add(scrollPane);
 		
 		tabelaOrcamento = new JTable();
@@ -100,19 +100,19 @@ public class Orcamentos extends JFrame {
 				{null, null, null, null, null, "", null, null, null, null, null},
 			},
 			new String[] {
-				"C\u00F3digo Or\u00E7amento", "Validade", "Entrega", "RT", "Imposto", "Valor", "Arquiteto", "Emissao", "Forma de pagamento", "Situa\u00E7\u00E3o", "Codigo Cliente"
+				"C\u00F3d. Or\u00E7a.", "Validade", "Entrega", "RT", "Imposto", "Valor", "Arquiteto", "Data Emiss\u00E3o", "Forma  Pgto", "Situa\u00E7\u00E3o", "C\u00F3d. Cliente"
 			}
 		));
-		tabelaOrcamento.getColumnModel().getColumn(0).setPreferredWidth(105);
+		tabelaOrcamento.getColumnModel().getColumn(0).setPreferredWidth(67);
 		tabelaOrcamento.getColumnModel().getColumn(1).setPreferredWidth(53);
 		tabelaOrcamento.getColumnModel().getColumn(2).setPreferredWidth(53);
 		tabelaOrcamento.getColumnModel().getColumn(3).setPreferredWidth(30);
 		tabelaOrcamento.getColumnModel().getColumn(4).setPreferredWidth(51);
-		tabelaOrcamento.getColumnModel().getColumn(5).setPreferredWidth(78);
-		tabelaOrcamento.getColumnModel().getColumn(6).setPreferredWidth(81);
-		tabelaOrcamento.getColumnModel().getColumn(8).setPreferredWidth(112);
+		tabelaOrcamento.getColumnModel().getColumn(5).setPreferredWidth(85);
+		tabelaOrcamento.getColumnModel().getColumn(6).setPreferredWidth(91);
+		tabelaOrcamento.getColumnModel().getColumn(8).setPreferredWidth(79);
 		tabelaOrcamento.getColumnModel().getColumn(9).setPreferredWidth(82);
-		tabelaOrcamento.getColumnModel().getColumn(10).setPreferredWidth(83);
+		tabelaOrcamento.getColumnModel().getColumn(10).setPreferredWidth(71);
 		scrollPane.setViewportView(tabelaOrcamento);
 		
 		/** _________________Botões e suas funções_____________________ **/

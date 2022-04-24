@@ -68,7 +68,7 @@ public class AdicionarMaterial extends JFrame {
 	public AdicionarMaterial() {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage("C:\\Users\\toni\\Desktop\\Programa\u00E7\u00E3o\\Eclipse\\ERP\\Imagens\\brasil.png"));
-		setTitle("ERP - Adicionar Material");
+		setTitle("ERP - Adicionar Materiais e Custos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 768, 479);
 		contentPane = new JPanel();
